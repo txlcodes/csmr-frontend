@@ -2,7 +2,8 @@
 // REMOVE ALL FIREBASE IMPORTS AND LOGIC
 // Add backend API helpers for admin CRUD
 
-const API_BASE = 'http://localhost:5000/api';
+// Import configuration
+const API_BASE = config.API_BASE_URL;
 
 function getToken() {
     return localStorage.getItem('token');
@@ -932,8 +933,8 @@ if (journalsSection) {
 }
 
 // Show journals section when navigated
-const menuItems = document.querySelectorAll('.menu-item a[data-section]');
-menuItems.forEach(item => {
+// Note: menuItems is already declared above, so we don't redeclare it here
+document.querySelectorAll('.menu-item a[data-section]').forEach(item => {
     item.addEventListener('click', (e) => {
         if (item.getAttribute('data-section') === 'journals') {
             showJournalsSection();

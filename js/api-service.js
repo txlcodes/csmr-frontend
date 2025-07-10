@@ -2,7 +2,7 @@
  * API Service for Journal Publication Website
  * Connects frontend to backend API endpoints
  */
-const API_URL = 'http://localhost:5000/api';
+const API_URL = config.API_BASE_URL;
 
 // Helper for making API requests
 async function fetchAPI(endpoint, options = {}) {

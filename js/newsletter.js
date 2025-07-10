@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function subscribeNewsletter(email) {
     try {
-        const response = await fetch('http://localhost:5000/api/newsletter', {
+        const response = await fetch(`${config.API_BASE_URL}/newsletter`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })

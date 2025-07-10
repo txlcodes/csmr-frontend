@@ -884,7 +884,7 @@ async function submitPaper(paperData) {
             formData.append(key, paperData[key]);
         }
     }
-    const response = await fetch('http://localhost:5000/api/articles', {
+    const response = await fetch(`${config.API_BASE_URL}/articles`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -897,7 +897,7 @@ async function submitPaper(paperData) {
 }
 
 async function getJournals() {
-    const response = await fetch('http://localhost:5000/api/journals');
+    const response = await fetch(`${config.API_BASE_URL}/journals`);
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Failed to fetch journals');
     return data;
@@ -905,7 +905,7 @@ async function getJournals() {
 
 async function getMyPapers() {
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:5000/api/articles', {
+    const response = await fetch(`${config.API_BASE_URL}/articles`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

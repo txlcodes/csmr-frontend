@@ -4,7 +4,7 @@
  */
 
 // API endpoints
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = config.API_BASE_URL;
 
 // Review System Manager
 class ReviewSystem {

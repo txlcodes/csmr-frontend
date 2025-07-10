@@ -355,7 +355,7 @@ function setupAuthListeners() {
             const password = document.getElementById('login-password').value;
             
             try {
-                const response = await fetch('http://localhost:5000/api/users/login', {
+                const response = await fetch(`${config.API_BASE_URL}/users/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -412,7 +412,7 @@ function setupAuthListeners() {
             const interests = document.getElementById('register-interests').value.split(',').map(i => i.trim());
             
             try {
-                const response = await fetch('http://localhost:5000/api/users', {
+                const response = await fetch(`${config.API_BASE_URL}/users`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
