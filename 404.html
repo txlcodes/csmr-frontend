@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Centre for Sustainability and Management Research (CSMR)</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/content-pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            color: #00277a;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        
+        .error-message {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        
+        .error-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .error-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <div class="top-utility-bar">
+        <div class="container">
+            <div class="utility-left">
+                <a href="#" class="institution-access">Institutional Access</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="utility-right">
+                <div class="auth-buttons">
+                    <a href="#" class="login-btn">Login</a>
+                    <span>/</span>
+                    <a href="#" class="register-btn">Register</a>
+                </div>
+                <div class="language-dropdown">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="ta">தமிழ்</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sticky Header (Navigation Bar) -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-svg">
+                            <svg width="160" height="60" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="35" fill="#00277a" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                                <rect x="65" y="15" width="2" height="30" fill="#2684ff"/>
+                                <text x="75" y="28" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">Centre for Sustainability</text>
+                                <text x="75" y="42" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">& Management Research</text>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Search journals, articles, authors…" aria-label="Search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <a href="journals.html">Journals</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Browse By Subject</h4>
+                                <ul>
+                                    <li><a href="journals.html#sustainability">Sustainability Science</a></li>
+                                    <li><a href="journals.html#management">Management Studies</a></li>
+                                    <li><a href="journals.html#policy">Policy Research</a></li>
+                                    <li><a href="journals.html#economics">Environmental Economics</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Featured Journals</h4>
+                                <ul>
+                                    <li><a href="journal-jsm.html">Journal of Sustainable Management</a></li>
+                                    <li><a href="journal-isr.html">Innovation & Sustainability Review</a></li>
+                                    <li><a href="journal-msq.html">Management Studies Quarterly</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li class="has-dropdown">
+                        <a href="authors.html">Authors</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Author Resources</h4>
+                                <ul>
+                                    <li><a href="submission-guidelines.html">Submission Guidelines</a></li>
+                                    <li><a href="author-services.html">Author Services</a></li>
+                                    <li><a href="ethics-policies.html">Ethics & Policies</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Error Content -->
+    <main class="page-content">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-message">Page Not Found</h1>
+            <p class="error-description">
+                The page you're looking for doesn't exist or has been moved. Please check the URL or navigate to one of our main sections below.
+            </p>
+            
+            <div class="error-links">
+                <a href="index.html" class="btn primary-btn"><i class="fas fa-home"></i> Home</a>
+                <a href="journals.html" class="btn secondary-btn"><i class="fas fa-book-open"></i> Journals</a>
+                <a href="articles.html" class="btn secondary-btn"><i class="fas fa-newspaper"></i> Articles</a>
+                <a href="contact.html" class="btn secondary-btn"><i class="fas fa-envelope"></i> Contact Us</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Common across pages) -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <svg width="140" height="50" viewBox="0 0 140 50" xmlns="http://www.w3.org/2000/svg">
+                            <text x="5" y="30" fill="#ffffff" font-family="Merriweather, serif" font-weight="700" font-size="20">CSMR</text>
+                            <rect x="60" y="12" width="1.5" height="25" fill="#2684ff"/>
+                            <text x="70" y="24" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="10">Centre for Sustainability</text>
+                            <text x="70" y="36" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="10">& Management Research</text>
+                        </svg>
+                    </div>
+                    <p>Publishing cutting-edge research in sustainability and management since 2015.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="journals.html">Journals</a></li>
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="authors.html">For Authors</a></li>
+                        <li><a href="conferences.html">Conferences</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <address>
+                        CSMR Headquarters<br>
+                        123 Research Avenue<br>
+                        New Delhi, 110001<br>
+                        India
+                    </address>
+                    <p>Email: <a href="mailto:info@csmr.org">info@csmr.org</a></p>
+                    <p>Phone: +91 11 2345 6789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Centre for Sustainability and Management Research. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

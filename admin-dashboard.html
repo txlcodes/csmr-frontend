@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CSMR</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/Chart.min.css">
+</head>
+<body class="admin-body">
+    <div class="admin-wrapper">
+        <!-- Admin Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="admin-logo">
+                    <svg width="40" height="40" viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg">
+                        <text x="5" y="35" fill="#ffffff" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                    </svg>
+                </div>
+                <h1>Admin Panel</h1>
+                <button class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="admin-user-info">
+                <div class="user-avatar">
+                    <span id="user-avatar-letter">A</span>
+                </div>
+                <div class="user-details">
+                    <h3 id="user-name">Admin User</h3>
+                    <p id="user-role">Administrator</p>
+                </div>
+            </div>
+            <ul class="admin-menu">
+                <li class="menu-header">Main</li>
+                <li class="menu-item active">
+                    <a href="#dashboard" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-header">Content Management</li>
+                <li class="menu-item">
+                    <a href="#journals" data-section="journals">
+                        <i class="fas fa-book"></i>
+                        <span>Journals</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#articles" data-section="articles">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#submissions" data-section="submissions">
+                        <i class="fas fa-file-upload"></i>
+                        <span>Submissions</span>
+                        <span class="badge">12</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#pages" data-section="pages">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Pages</span>
+                    </a>
+                </li>
+                <li class="menu-header">User Management</li>
+                <li class="menu-item">
+                    <a href="#users" data-section="users">
+                        <i class="fas fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li class="menu-item admin-only">
+                    <a href="#admins" data-section="admins">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Administrators</span>
+                    </a>
+                </li>
+                <li class="menu-header">Communication</li>
+                <li class="menu-item">
+                    <a href="#newsletters" data-section="newsletters">
+                        <i class="fas fa-envelope"></i>
+                        <span>Newsletters</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#contacts" data-section="contacts">
+                        <i class="fas fa-address-book"></i>
+                        <span>Contact Requests</span>
+                        <span class="badge danger">5</span>
+                    </a>
+                </li>
+                <li class="menu-header">System</li>
+                <li class="menu-item">
+                    <a href="#settings" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#logs" data-section="logs">
+                        <i class="fas fa-history"></i>
+                        <span>Activity Logs</span>
+                    </a>
+                </li>
+                <li class="menu-item logout">
+                    <a href="#" id="admin-logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="index.html" class="back-to-site">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Website</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="breadcrumbs">
+                        <a href="#dashboard">Dashboard</a>
+                        <span class="separator">/</span>
+                        <span class="current-page">Overview</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-search">
+                        <input type="text" placeholder="Search...">
+                        <button type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="notifications">
+                        <button type="button" class="notification-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </button>
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <a href="#">Mark all as read</a>
+                            </div>
+                            <ul class="notification-list">
+                                <li class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-file-upload"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>New submission from Dr. Rajesh Kumar</p>
+                                        <span class="notification-time">10 minutes ago</span>
+                                    </div>
+                                </li>
+                                <li class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>New user registration: Dr. Priya Sharma</p>
+                                        <span class="notification-time">1 hour ago</span>
+                                    </div>
+                                </li>
+                                <li class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p>New contact form submission</p>
+                                        <span class="notification-time">3 hours ago</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="notification-footer">
+                                <a href="#notifications">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-dropdown">
+                        <button type="button" class="user-dropdown-btn">
+                            <div class="user-avatar small">
+                                <span>A</span>
+                            </div>
+                            <span class="user-name">Admin</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="#profile">
+                                <i class="fas fa-user"></i>
+                                <span>My Profile</span>
+                            </a>
+                            <a href="#settings">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                            <hr>
+                            <a href="#" id="header-logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div id="dashboard" class="admin-section active">
+                <div class="dashboard-header">
+                    <h1>Dashboard</h1>
+                    <div class="dashboard-actions">
+                        <button type="button" class="btn-refresh">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Refresh</span>
+                        </button>
+                        <div class="date-filter">
+                            <select>
+                                <option>Last 7 days</option>
+                                <option>Last 30 days</option>
+                                <option>Last 90 days</option>
+                                <option>Last 12 months</option>
+                                <option>All time</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3>Active Journals</h3>
+                            <p class="stat-value">3</p>
+                            <p class="stat-change increase">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>Impact Factor: 4.2</span> avg
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3>Published Articles</h3>
+                            <p class="stat-value">892</p>
+                            <p class="stat-change increase">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>23%</span> acceptance rate
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3>Active Submissions</h3>
+                            <p class="stat-value">45</p>
+                            <p class="stat-change">
+                                <i class="fas fa-clock"></i>
+                                <span>Avg. 45 days</span> review time
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-data">
+                            <h3>Active Users</h3>
+                            <p class="stat-value">1,847</p>
+                            <p class="stat-change increase">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>342</span> reviewers
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>Submissions by Journal</h3>
+                            <div class="card-actions">
+                                <button type="button" class="btn-card-action">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="submissions-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3>User Growth</h3>
+                            <div class="card-actions">
+                                <button type="button" class="btn-card-action">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="users-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-tables">
+                    <div class="table-card">
+                        <div class="card-header">
+                            <h3>Recent Submissions</h3>
+                            <a href="#submissions" class="view-all">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Manuscript ID</th>
+                                        <th>Title</th>
+                                        <th>Author(s)</th>
+                                        <th>Journal</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>CSMR-2025-045</td>
+                                        <td>AI-Driven Sustainability Metrics for Corporate ESG Assessment</td>
+                                        <td>Dr. Ananya Krishnan, Prof. Michael Chen</td>
+                                        <td>Innovation & Sustainability Review</td>
+                                        <td>Jan 22, 2025</td>
+                                        <td><span class="status pending">Initial Review</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Details" onclick="viewSubmission('CSMR-2025-045')">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Assign Reviewers" onclick="assignReviewers('CSMR-2025-045')">
+                                                    <i class="fas fa-user-plus"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Contact Author">
+                                                    <i class="fas fa-envelope"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CSMR-2025-044</td>
+                                        <td>Blockchain Implementation in Sustainable Supply Chain: A Case Study of Indian Textile Industry</td>
+                                        <td>Dr. Rajesh Kumar, Dr. Priya Sharma</td>
+                                        <td>Journal of Sustainable Management</td>
+                                        <td>Jan 21, 2025</td>
+                                        <td><span class="status under-review">Under Review</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Review Progress">
+                                                    <i class="fas fa-chart-line"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Send Reminder">
+                                                    <i class="fas fa-bell"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CSMR-2025-043</td>
+                                        <td>Impact of Green Finance on SME Performance: Evidence from South Asian Markets</td>
+                                        <td>Dr. Vikram Singh et td>
+                                        <td>Management Studies Quarterly</td>
+                                        <td>Jan 20, 2025</td>
+                                        <td><span class="status revision">Revision Required</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="View Reviews">
+                                                    <i class="fas fa-comments"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Track Revision">
+                                                    <i class="fas fa-clock"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CSMR-2025-042</td>
+                                        <td>Circular Economy Practices in Indian Manufacturing: A Multi-Case Analysis</td>
+                                        <td>Dr. Meena Patel, Dr. Suresh Reddy</td>
+                                        <td>Journal of Sustainable Management</td>
+                                        <td>Jan 19, 2025</td>
+                                        <td><span class="status approved">Accepted</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Production Queue">
+                                                    <i class="fas fa-tasks"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Generate DOI">
+                                                    <i class="fas fa-link"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CSMR-2025-041</td>
+                                        <td>Climate Risk Disclosure and Financial Performance: A Study of BSE 500 Companies</td>
+                                        <td>Prof. Arjun Mehta et al.</td>
+                                        <td>Innovation & Sustainability Review</td>
+                                        <td>Jan 18, 2025</td>
+                                        <td><span class="status pending">Awaiting Editor</span></td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Assign Editor">
+                                                    <i class="fas fa-user-edit"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Quick Review">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="table-card">
+                        <div class="card-header">
+                            <h3>Recent User Registrations</h3>
+                            <a href="#users" class="view-all">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Date</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dr. Ananya Krishnan</td>
+                                        <td>ananya.krishnan@iitb.ac.in</td>
+                                        <td>Jan 22, 2025</td>
+                                        <td>Author</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Profile">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Assign Role">
+                                                    <i class="fas fa-user-tag"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Send Welcome Email">
+                                                    <i class="fas fa-envelope"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prof. Michael Chen</td>
+                                        <td>m.chen@stanford.edu</td>
+                                        <td>Jan 21, 2025</td>
+                                        <td>Reviewer</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Profile">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="View Review History">
+                                                    <i class="fas fa-history"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Expertise Areas">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dr. Sanjay Verma</td>
+                                        <td>s.verma@iisc.ac.in</td>
+                                        <td>Jan 20, 2025</td>
+                                        <td>Editor</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Profile">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Editorial Board">
+                                                    <i class="fas fa-users"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Permissions">
+                                                    <i class="fas fa-lock"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dr. Sarah Johnson</td>
+                                        <td>sarah.j@cambridge.ac.uk</td>
+                                        <td>Jan 19, 2025</td>
+                                        <td>Author/Reviewer</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button type="button" class="btn-table-action" title="View Profile">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Activity Log">
+                                                    <i class="fas fa-chart-line"></i>
+                                                </button>
+                                                <button type="button" class="btn-table-action" title="Credentials">
+                                                    <i class="fas fa-certificate"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Journals Management Section -->
+            <div id="journals" class="admin-section" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="admin-title">Journals Management</h1>
+                    <button class="btn primary-btn" id="add-journal-btn">Add New Journal</button>
+                </div>
+                <div class="content-card">
+                    <h2>All Journals</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>ISSN</th>
+                                <th>Subject</th>
+                                <th>Articles</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Journals will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add Journal Modal -->
+            <div id="journal-modal" class="admin-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Add / Edit Journal</h2>
+                    <form id="journal-form">
+                        <div class="form-row">
+                            <label for="journal-title">Journal Title</label>
+                            <input type="text" id="journal-title" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="journal-issn">ISSN</label>
+                            <input type="text" id="journal-issn" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="journal-subject">Subject Area</label>
+                            <select id="journal-subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="sustainability">Sustainability</option>
+                                <option value="management">Management</option>
+                                <option value="innovation">Innovation</option>
+                                <option value="policy">Policy</option>
+                                <option value="economics">Economics</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label for="journal-description">Description</label>
+                            <textarea id="journal-description" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn primary-btn">Save Journal</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Articles Management Section -->
+            <div id="articles" class="admin-section" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="admin-title">Articles Management</h1>
+                    <button class="btn primary-btn" id="add-article-btn">Add New Article</button>
+                </div>
+                <div class="content-card">
+                    <h2>All Articles</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Journal</th>
+                                <th>Authors</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Articles will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Add/Edit Article Modal -->
+            <div id="article-modal" class="admin-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Add / Edit Article</h2>
+                    <form id="article-form">
+                        <div class="form-row">
+                            <label for="article-title">Article Title</label>
+                            <input type="text" id="article-title" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="article-journal">Journal</label>
+                            <input type="text" id="article-journal" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="article-authors">Authors</label>
+                            <input type="text" id="article-authors" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="article-status">Status</label>
+                            <select id="article-status" required>
+                                <option value="submitted">Submitted</option>
+                                <option value="under_review">Under Review</option>
+                                <option value="accepted">Accepted</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label for="article-abstract">Abstract</label>
+                            <textarea id="article-abstract" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn primary-btn">Save Article</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- CFP Management Section -->
+            <div id="cfp" class="admin-section" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="admin-title">Call for Papers (CFP) Management</h1>
+                    <button class="btn primary-btn" id="add-cfp-btn">Add New CFP</button>
+                </div>
+                <div class="content-card">
+                    <h2>All CFPs</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- CFPs will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Add/Edit CFP Modal -->
+            <div id="cfp-modal" class="admin-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Add / Edit CFP</h2>
+                    <form id="cfp-form">
+                        <div class="form-row">
+                            <label for="cfp-title">CFP Title</label>
+                            <input type="text" id="cfp-title" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="cfp-deadline">Deadline</label>
+                            <input type="date" id="cfp-deadline" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="cfp-status">Status</label>
+                            <select id="cfp-status" required>
+                                <option value="open">Open</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label for="cfp-description">Description</label>
+                            <textarea id="cfp-description" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn primary-btn">Save CFP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Newsletter Management Section -->
+            <div id="newsletters" class="admin-section" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="admin-title">Newsletter Subscribers</h1>
+                </div>
+                <div class="content-card">
+                    <h2>All Subscribers</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Date Subscribed</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Subscribers will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Contact Requests Management Section -->
+            <div id="contacts" class="admin-section" style="display: none;">
+                <div class="admin-header">
+                    <h1 class="admin-title">Contact Requests</h1>
+                </div>
+                <div class="content-card">
+                    <h2>All Contact Requests</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Contact requests will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="login-required-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Authentication Required</h2>
+                <button type="button" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Please login with administrator credentials to access this page.</p>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-email">Email</label>
+                        <input type="email" id="admin-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script type="module" src="js/admin-dashboard.js"></script>
+</body>
+</html> 

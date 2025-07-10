@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Centre for Sustainability and Management Research (CSMR)</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/content-pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* User dropdown styles */
+        .user-dropdown {
+            position: relative;
+            display: none;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .user-dropdown .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background-color: rgba(38, 132, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .user-dropdown .user-info:hover {
+            background-color: rgba(38, 132, 255, 0.2);
+        }
+        
+        .user-dropdown .user-name {
+            font-weight: 500;
+            color: #00277a;
+        }
+        
+        .user-dropdown .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 180px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .user-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .user-dropdown .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .user-dropdown .dropdown-menu a:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .user-dropdown .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-dropdown .dropdown-menu #logout-link {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .user-dropdown .dropdown-menu #logout-link:hover {
+            background-color: #fff8f8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <div class="top-utility-bar">
+        <div class="container">
+            <div class="utility-left">
+                <a href="#" class="institution-access">Institutional Access</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="utility-right">
+                <div class="auth-buttons">
+                    <a href="#" class="login-btn">Login</a>
+                    <span>/</span>
+                    <a href="#" class="register-btn">Register</a>
+                </div>
+                <div class="language-dropdown">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="ta">தமிழ்</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sticky Header (Navigation Bar) -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-svg">
+                            <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="35" fill="#00277a" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                                <rect x="65" y="15" width="2" height="30" fill="#2684ff"/>
+                                <text x="75" y="28" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">Centre for Sustainability</text>
+                                <text x="75" y="42" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">& Management Research</text>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Search journals, articles, authors…" aria-label="Search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <a href="journals.html">Journals</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Browse By Subject</h4>
+                                <ul>
+                                    <li><a href="journals.html#sustainability">Sustainability Science</a></li>
+                                    <li><a href="journals.html#management">Management Studies</a></li>
+                                    <li><a href="journals.html#policy">Policy Research</a></li>
+                                    <li><a href="journals.html#economics">Environmental Economics</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Featured Journals</h4>
+                                <ul>
+                                    <li><a href="journal-jsm.html">Journal of Sustainable Management</a></li>
+                                    <li><a href="journal-isr.html">Innovation & Sustainability Review</a></li>
+                                    <li><a href="journal-msq.html">Management Studies Quarterly</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li class="has-dropdown">
+                        <a href="authors.html">Authors</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Author Resources</h4>
+                                <ul>
+                                    <li><a href="submission-guidelines.html">Submission Guidelines</a></li>
+                                    <li><a href="author-services.html">Author Services</a></li>
+                                    <li><a href="ethics-policies.html">Ethics & Policies</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Announcement Banner -->
+    <div class="announcement-banner">
+        <div class="container">
+            <p><strong>Call for Papers:</strong> Special Issue on Sustainable Innovation - Deadline May 31, 2025 <a href="conferences.html#special-issue">Learn More</a></p>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <!-- Page Header Banner -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li>Contact</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p>We welcome inquiries from researchers, institutions, and industry partners. Please use the form or contact details below to reach out to us.</p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h3>Address</h3>
+                                    <address>
+                                        CSMR Headquarters<br>
+                                        123 Research Avenue<br>
+                                        New Delhi, 110001<br>
+                                        India
+                                    </address>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h3>Email</h3>
+                                    <p>General Inquiries: <a href="mailto:info@csmr.org">info@csmr.org</a></p>
+                                    <p>Submissions: <a href="mailto:submissions@csmr.org">submissions@csmr.org</a></p>
+                                    <p>Media: <a href="mailto:media@csmr.org">media@csmr.org</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h3>Phone</h3>
+                                    <p>Main Office: +91 11 2345 6789</p>
+                                    <p>Editorial: +91 11 2345 6790</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="far fa-clock"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h3>Office Hours</h3>
+                                    <p>Monday - Friday: 9:00 AM - 5:00 PM IST</p>
+                                    <p>Saturday: 9:00 AM - 1:00 PM IST</p>
+                                    <p>Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-connect">
+                            <h3>Connect With Us</h3>
+                            <div class="social-icons">
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <h2>Send us a Message</h2>
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="organization">Organization/Institution</label>
+                                <input type="text" id="organization" name="organization">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inquiry-type">Inquiry Type</label>
+                                <select id="inquiry-type" name="inquiry-type">
+                                    <option value="">Please Select</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="submission">Journal Submission</option>
+                                    <option value="partnership">Research Partnership</option>
+                                    <option value="conference">Conference Information</option>
+                                    <option value="technical">Technical Support</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Your Message *</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <div class="form-group consent-check">
+                                <input type="checkbox" id="privacy-consent" name="privacy-consent" required>
+                                <label for="privacy-consent">I agree to the processing of my personal data in accordance with CSMR's <a href="privacy-policy.html">Privacy Policy</a>.</label>
+                            </div>
+                            
+                            <div class="form-submit">
+                                <button type="submit" class="btn primary-btn">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="location-map">
+                    <h2>Our Location</h2>
+                    <!-- Placeholder for map -->
+                    <div class="map-placeholder" style="background-color: #f5f7fa; height: 400px; width: 100%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                        <span>Interactive Map Would Be Displayed Here</span>
+                    </div>
+                </div>
+                
+                <div class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-items">
+                        <div class="faq-item">
+                            <h3 class="faq-question">How can I submit a manuscript to one of your journals?</h3>
+                            <div class="faq-answer">
+                                <p>You can submit manuscripts through our online submission portal. Please visit our <a href="submission-guidelines.html">Submission Guidelines</a> page for detailed instructions on the submission process.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h3 class="faq-question">What is the typical review timeline for submissions?</h3>
+                            <div class="faq-answer">
+                                <p>The initial review process typically takes 4-6 weeks. If accepted for peer review, the complete process may take 3-4 months depending on the journal and subject area.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h3 class="faq-question">How can I subscribe to your journals?</h3>
+                            <div class="faq-answer">
+                                <p>Institutional and individual subscriptions are available. Please contact our subscription department at <a href="mailto:subscriptions@csmr.org">subscriptions@csmr.org</a> for rates and subscription options.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <h3 class="faq-question">Does CSMR offer opportunities for research collaboration?</h3>
+                            <div class="faq-answer">
+                                <p>Yes, we actively seek research partnerships with academic institutions, industry, and government organizations. Please contact our partnerships team at <a href="mailto:partnerships@csmr.org">partnerships@csmr.org</a> to discuss potential collaboration opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Newsletter Section (Common across pages) -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <h2>Stay Updated</h2>
+                <p>Stay updated with the latest research, calls for papers, and conference invites.</p>
+                <form action="#" method="post" class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn subscribe-btn">Subscribe</button>
+                    </div>
+                    <div class="consent-check">
+                        <input type="checkbox" id="consent" required>
+                        <label for="consent">I agree to receive emails from CSMR and understand I can unsubscribe at any time.</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Common across pages) -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="logo-svg-footer">
+                            <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="35" fill="#ffffff" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                                <rect x="65" y="15" width="2" height="30" fill="#ffffff"/>
+                                <text x="75" y="28" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">Centre for Sustainability</text>
+                                <text x="75" y="42" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">& Management Research</text>
+                        </svg>
+                        </div>
+                    </div>
+                    <p>Publishing cutting-edge research in sustainability and management since 2015.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="journals.html">Journals</a></li>
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="authors.html">For Authors</a></li>
+                        <li><a href="conferences.html">Conferences</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <address>
+                        CSMR Headquarters<br>
+                        123 Research Avenue<br>
+                        New Delhi, 110001<br>
+                        India
+                    </address>
+                    <p>Email: <a href="mailto:info@csmr.org">info@csmr.org</a></p>
+                    <p>Phone: +91 11 2345 6789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Centre for Sustainability and Management Research. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/api-service.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Process contact form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value,
+                        organization: document.getElementById('organization').value || '',
+                        inquiryType: document.getElementById('inquiry-type').value || 'general'
+                    };
+                    
+                    // Use our API service to submit the form
+                    ContactService.submitContactForm(formData)
+                        .then(response => {
+                            console.log('Contact form submitted successfully', response);
+                            
+                            // Clear form and show success message
+                            contactForm.reset();
+                            
+                            // Create success message
+                            const successMsg = document.createElement('div');
+                            successMsg.className = 'success-message';
+                            successMsg.style.padding = '10px';
+                            successMsg.style.background = '#d4edda';
+                            successMsg.style.color = '#155724';
+                            successMsg.style.borderRadius = '4px';
+                            successMsg.style.marginTop = '20px';
+                            successMsg.style.textAlign = 'center';
+                            successMsg.innerHTML = '<p>Thank you for your message! We will get back to you shortly.</p>';
+                            
+                            // Insert after form
+                            contactForm.parentNode.insertBefore(successMsg, contactForm.nextSibling);
+                            
+                            // Remove success message after 5 seconds
+                            setTimeout(() => {
+                                successMsg.style.opacity = '0';
+                                successMsg.style.transition = 'opacity 0.5s';
+                                setTimeout(() => {
+                                    successMsg.remove();
+                                }, 500);
+                            }, 5000);
+                        })
+                        .catch(error => {
+                            console.error('Contact form submission failed', error);
+                            
+                            // Create error message
+                            const errorMsg = document.createElement('div');
+                            errorMsg.className = 'error-message';
+                            errorMsg.style.padding = '10px';
+                            errorMsg.style.background = '#f8d7da';
+                            errorMsg.style.color = '#721c24';
+                            errorMsg.style.borderRadius = '4px';
+                            errorMsg.style.marginTop = '20px';
+                            errorMsg.style.textAlign = 'center';
+                            errorMsg.innerHTML = `<p>Error: ${error.message || 'Something went wrong. Please try again later.'}</p>`;
+                            
+                            // Insert after form
+                            contactForm.parentNode.insertBefore(errorMsg, contactForm.nextSibling);
+                            
+                            // Remove error message after 5 seconds
+                            setTimeout(() => {
+                                errorMsg.style.opacity = '0';
+                                errorMsg.style.transition = 'opacity 0.5s';
+                                setTimeout(() => {
+                                    errorMsg.remove();
+                                }, 500);
+                            }, 5000);
+                        });
+                });
+            }
+            
+            // Handle newsletter subscription
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = newsletterForm.querySelector('input[type="email"]').value;
+                    
+                    // Use our API service to subscribe to newsletter
+                    NewsletterService.subscribe(email)
+                        .then(response => {
+                            console.log('Newsletter subscription successful', response);
+                            
+                            // Clear form and show success message
+                            newsletterForm.reset();
+                            
+                            // Create success message
+                            const successMsg = document.createElement('div');
+                            successMsg.className = 'success-message';
+                            successMsg.style.padding = '10px';
+                            successMsg.style.background = '#d4edda';
+                            successMsg.style.color = '#155724';
+                            successMsg.style.borderRadius = '4px';
+                            successMsg.style.marginTop = '20px';
+                            successMsg.style.textAlign = 'center';
+                            successMsg.innerHTML = '<p>Thank you for subscribing to our newsletter!</p>';
+                            
+                            // Insert after form
+                            newsletterForm.parentNode.insertBefore(successMsg, newsletterForm.nextSibling);
+                            
+                            // Remove success message after 5 seconds
+                            setTimeout(() => {
+                                successMsg.style.opacity = '0';
+                                successMsg.style.transition = 'opacity 0.5s';
+                                setTimeout(() => {
+                                    successMsg.remove();
+                                }, 500);
+                            }, 5000);
+                        })
+                        .catch(error => {
+                            console.error('Newsletter subscription failed', error);
+                            
+                            // Create error message
+                            const errorMsg = document.createElement('div');
+                            errorMsg.className = 'error-message';
+                            errorMsg.style.padding = '10px';
+                            errorMsg.style.background = '#f8d7da';
+                            errorMsg.style.color = '#721c24';
+                            errorMsg.style.borderRadius = '4px';
+                            errorMsg.style.marginTop = '20px';
+                            errorMsg.style.textAlign = 'center';
+                            errorMsg.innerHTML = `<p>Error: ${error.message || 'Something went wrong. Please try again later.'}</p>`;
+                            
+                            // Insert after form
+                            newsletterForm.parentNode.insertBefore(errorMsg, newsletterForm.nextSibling);
+                            
+                            // Remove error message after 5 seconds
+                            setTimeout(() => {
+                                errorMsg.style.opacity = '0';
+                                errorMsg.style.transition = 'opacity 0.5s';
+                                setTimeout(() => {
+                                    errorMsg.remove();
+                                }, 500);
+                            }, 5000);
+                        });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

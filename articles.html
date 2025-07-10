@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - Centre for Sustainability and Management Research (CSMR)</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/content-pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* User dropdown styles */
+        .user-dropdown {
+            position: relative;
+            display: none;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .user-dropdown .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background-color: rgba(38, 132, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .user-dropdown .user-info:hover {
+            background-color: rgba(38, 132, 255, 0.2);
+        }
+        
+        .user-dropdown .user-name {
+            font-weight: 500;
+            color: #00277a;
+        }
+        
+        .user-dropdown .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 180px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .user-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .user-dropdown .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .user-dropdown .dropdown-menu a:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .user-dropdown .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-dropdown .dropdown-menu #logout-link {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .user-dropdown .dropdown-menu #logout-link:hover {
+            background-color: #fff8f8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <div class="top-utility-bar">
+        <div class="container">
+            <div class="utility-left">
+                <a href="#" class="institution-access">Institutional Access</a>
+                <a href="#">Help</a>
+            </div>
+            <div class="utility-right">
+                <div class="auth-buttons">
+                    <a href="#" class="login-btn">Login</a>
+                    <span>/</span>
+                    <a href="#" class="register-btn">Register</a>
+                </div>
+                <div class="language-dropdown">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="ta">தமிழ்</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sticky Header (Navigation Bar) -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-svg">
+                            <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="35" fill="#00277a" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                                <rect x="65" y="15" width="2" height="30" fill="#2684ff"/>
+                                <text x="75" y="28" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">Centre for Sustainability</text>
+                                <text x="75" y="42" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">& Management Research</text>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Search journals, articles, authors…" aria-label="Search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="has-dropdown">
+                        <a href="journals.html">Journals</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Browse By Subject</h4>
+                                <ul>
+                                    <li><a href="journals.html#sustainability">Sustainability Science</a></li>
+                                    <li><a href="journals.html#management">Management Studies</a></li>
+                                    <li><a href="journals.html#policy">Policy Research</a></li>
+                                    <li><a href="journals.html#economics">Environmental Economics</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Featured Journals</h4>
+                                <ul>
+                                    <li><a href="journal-jsm.html">Journal of Sustainable Management</a></li>
+                                    <li><a href="journal-isr.html">Innovation & Sustainability Review</a></li>
+                                    <li><a href="journal-msq.html">Management Studies Quarterly</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="articles.html" class="active">Articles</a></li>
+                    <li class="has-dropdown">
+                        <a href="authors.html">Authors</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Author Resources</h4>
+                                <ul>
+                                    <li><a href="submission-guidelines.html">Submission Guidelines</a></li>
+                                    <li><a href="author-services.html">Author Services</a></li>
+                                    <li><a href="ethics-policies.html">Ethics & Policies</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Announcement Banner -->
+    <div class="announcement-banner">
+        <div class="container">
+            <p><strong>Call for Papers:</strong> Special Issue on Sustainable Innovation - Deadline May 31, 2025 <a href="conferences.html#special-issue">Learn More</a></p>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <!-- Page Header Banner -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Research Articles</h1>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li>Articles</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="article-search">
+            <div class="container">
+                <div class="search-container">
+                    <h2>Find Research Articles</h2>
+                    <div class="advanced-search">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search by title, author, keyword..." class="main-search">
+                            <button type="submit" class="btn primary-btn">Search</button>
+                        </div>
+                        <div class="search-filters">
+                            <div class="filter-group">
+                                <label>Journal</label>
+                                <select>
+                                    <option value="">All Journals</option>
+                                    <option value="jsm">Journal of Sustainable Management</option>
+                                    <option value="isr">Innovation & Sustainability Review</option>
+                                    <option value="msq">Management Studies Quarterly</option>
+                                    <option value="ssp">Sustainability Science & Policy</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Subject Area</label>
+                                <select>
+                                    <option value="">All Subject Areas</option>
+                                    <option value="sustainability">Sustainability Science</option>
+                                    <option value="management">Management Studies</option>
+                                    <option value="policy">Policy Research</option>
+                                    <option value="economics">Environmental Economics</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Publication Date</label>
+                                <select>
+                                    <option value="">All Dates</option>
+                                    <option value="lastMonth">Last Month</option>
+                                    <option value="lastThreeMonths">Last 3 Months</option>
+                                    <option value="lastSixMonths">Last 6 Months</option>
+                                    <option value="lastYear">Last Year</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Access Type</label>
+                                <select>
+                                    <option value="">All Types</option>
+                                    <option value="open">Open Access</option>
+                                    <option value="subscription">Subscription</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn secondary-btn">Apply Filters</button>
+                            <button class="btn text-btn">Reset</button>
+                            <a href="#" class="advanced-search-toggle">Advanced Search Options</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Articles -->
+        <section class="latest-articles-section">
+            <div class="container">
+                <h2 class="section-title">Latest Research Articles</h2>
+                <div class="articles-tabs">
+                    <ul class="tabs-nav">
+                        <li class="active"><a href="#most-recent">Most Recent</a></li>
+                        <li><a href="#most-cited">Most Cited</a></li>
+                        <li><a href="#most-downloaded">Most Downloaded</a></li>
+                        <li><a href="#trending">Trending</a></li>
+                    </ul>
+                    <div class="tabs-content">
+                        <div id="most-recent" class="tab-content active">
+                            <div class="articles-list">
+                                <div class="article-item">
+                                    <div class="article-meta">
+                                        <span class="article-journal">Journal of Sustainable Management</span>
+                                        <span class="article-date">May 10, 2025</span>
+                                        <span class="article-access open-access"><i class="fas fa-unlock"></i> Open Access</span>
+                                    </div>
+                                    <h3 class="article-title"><a href="#">Sustainable Business Models in Post-Pandemic India: Challenges and Opportunities for SMEs</a></h3>
+                                    <p class="article-authors">Priya Sharma, Rahul Verma, Anjali Desai</p>
+                                    <p class="article-abstract">This study examines how small and medium enterprises in India have adapted their business models to address sustainability challenges in the post-pandemic economy. Through a mixed-methods approach involving surveys of 150 SMEs and in-depth interviews with 25 business leaders, the research identifies key factors enabling sustainable transitions.</p>
+                                    <div class="article-metrics">
+                                        <span><i class="fas fa-download"></i> 347</span>
+                                        <span><i class="fas fa-quote-right"></i> 5</span>
+                                    </div>
+                                    <div class="article-actions">
+                                        <a href="#" class="btn secondary-btn">Read Full Article</a>
+                                        <a href="#" class="btn text-btn"><i class="far fa-file-pdf"></i> Download PDF</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="article-item">
+                                    <div class="article-meta">
+                                        <span class="article-journal">Innovation & Sustainability Review</span>
+                                        <span class="article-date">May 5, 2025</span>
+                                        <span class="article-access hybrid-access"><i class="fas fa-unlock-alt"></i> Hybrid</span>
+                                    </div>
+                                    <h3 class="article-title"><a href="#">Circular Economy Practices in the Indian Textile Industry: A Comparative Analysis</a></h3>
+                                    <p class="article-authors">Vikram Singh, Meera Patel, Sanjay Gupta</p>
+                                    <p class="article-abstract">This paper analyzes circular economy adoption in the Indian textile industry through a comparative case study of three major textile manufacturing clusters. The findings highlight significant regional variations in implementation of circular practices and identify regulatory, technological, and market factors influencing adoption rates.</p>
+                                    <div class="article-metrics">
+                                        <span><i class="fas fa-download"></i> 275</span>
+                                        <span><i class="fas fa-quote-right"></i> 3</span>
+                                    </div>
+                                    <div class="article-actions">
+                                        <a href="#" class="btn secondary-btn">Read Full Article</a>
+                                        <a href="#" class="btn text-btn"><i class="far fa-file-pdf"></i> Download PDF</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="article-item">
+                                    <div class="article-meta">
+                                        <span class="article-journal">Sustainability Science & Policy</span>
+                                        <span class="article-date">April 28, 2025</span>
+                                        <span class="article-access open-access"><i class="fas fa-unlock"></i> Open Access</span>
+                                    </div>
+                                    <h3 class="article-title"><a href="#">Evaluating the Effectiveness of Climate Adaptation Policies in South Asian Urban Centers</a></h3>
+                                    <p class="article-authors">Arjun Kumar, Neha Singh, Thomas Chen</p>
+                                    <p class="article-abstract">This research evaluates climate adaptation policies implemented across 15 major urban centers in South Asia between 2015-2025. Using a policy effectiveness framework developed specifically for climate adaptation measures, the study identifies critical success factors and implementation barriers in urban governance contexts.</p>
+                                    <div class="article-metrics">
+                                        <span><i class="fas fa-download"></i> 312</span>
+                                        <span><i class="fas fa-quote-right"></i> 7</span>
+                                    </div>
+                                    <div class="article-actions">
+                                        <a href="#" class="btn secondary-btn">Read Full Article</a>
+                                        <a href="#" class="btn text-btn"><i class="far fa-file-pdf"></i> Download PDF</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="article-item">
+                                    <div class="article-meta">
+                                        <span class="article-journal">Management Studies Quarterly</span>
+                                        <span class="article-date">April 22, 2025</span>
+                                        <span class="article-access subscription-access"><i class="fas fa-lock"></i> Subscription</span>
+                                    </div>
+                                    <h3 class="article-title"><a href="#">Leadership for Sustainability Transformation: A Longitudinal Study of Corporate India</a></h3>
+                                    <p class="article-authors">Anita Reddy, Michael Wong, Rajesh Khanna</p>
+                                    <p class="article-abstract">This longitudinal study tracks leadership approaches to sustainability transformation in 30 major Indian corporations over a five-year period. The research identifies distinct leadership styles and their effectiveness in driving organizational change toward more sustainable business practices and corporate governance structures.</p>
+                                    <div class="article-metrics">
+                                        <span><i class="fas fa-download"></i> 183</span>
+                                        <span><i class="fas fa-quote-right"></i> 2</span>
+                                    </div>
+                                    <div class="article-actions">
+                                        <a href="#" class="btn secondary-btn">Read Full Article</a>
+                                        <a href="#" class="btn text-btn"><i class="far fa-file-pdf"></i> Download PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="load-more">
+                                <button class="btn secondary-btn">Load More Articles</button>
+                            </div>
+                        </div>
+                        
+                        <div id="most-cited" class="tab-content">
+                            <!-- Content for Most Cited tab would go here -->
+                            <p class="placeholder-message">Switch to this tab to view the most cited articles.</p>
+                        </div>
+                        
+                        <div id="most-downloaded" class="tab-content">
+                            <!-- Content for Most Downloaded tab would go here -->
+                            <p class="placeholder-message">Switch to this tab to view the most downloaded articles.</p>
+                        </div>
+                        
+                        <div id="trending" class="tab-content">
+                            <!-- Content for Trending tab would go here -->
+                            <p class="placeholder-message">Switch to this tab to view trending articles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Collection -->
+        <section class="featured-collection">
+            <div class="container">
+                <div class="collection-box">
+                    <div class="collection-header">
+                        <h2>Featured Collection: Sustainable Development Goals in Action</h2>
+                        <p class="collection-description">This curated collection brings together research addressing implementation of the UN Sustainable Development Goals across various sectors in South Asia.</p>
+                    </div>
+                    <div class="collection-articles">
+                        <div class="collection-article">
+                            <h3><a href="#">Corporate Engagement with SDGs: Evidence from Indian Public Sector Enterprises</a></h3>
+                            <p class="article-meta">
+                                <span class="article-journal">Journal of Sustainable Management</span>
+                                <span class="article-date">January 2025</span>
+                            </p>
+                        </div>
+                        <div class="collection-article">
+                            <h3><a href="#">Leveraging Digital Technologies for SDG Implementation in Rural Communities</a></h3>
+                            <p class="article-meta">
+                                <span class="article-journal">Innovation & Sustainability Review</span>
+                                <span class="article-date">February 2025</span>
+                            </p>
+                        </div>
+                        <div class="collection-article">
+                            <h3><a href="#">Aligning Education Policies with SDG 4: Comparative Analysis of South Asian Approaches</a></h3>
+                            <p class="article-meta">
+                                <span class="article-journal">Sustainability Science & Policy</span>
+                                <span class="article-date">March 2025</span>
+                            </p>
+                        </div>
+                        <div class="collection-article">
+                            <h3><a href="#">Financing the SDGs: Innovative Mechanisms and Public-Private Partnerships</a></h3>
+                            <p class="article-meta">
+                                <span class="article-journal">Management Studies Quarterly</span>
+                                <span class="article-date">April 2025</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="collection-actions">
+                        <a href="#" class="btn secondary-btn">View Full Collection</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Issues -->
+        <section class="special-issues">
+            <div class="container">
+                <h2 class="section-title">Current Special Issues</h2>
+                <div class="special-issues-grid">
+                    <div class="special-issue-card">
+                        <div class="issue-badge">Open for Submissions</div>
+                        <h3>Sustainable Innovation & Future Management Practices</h3>
+                        <p class="issue-journal">Journal of Sustainable Management</p>
+                        <p class="issue-deadline"><i class="far fa-calendar-alt"></i> Submission Deadline: May 31, 2025</p>
+                        <p class="issue-description">This special issue focuses on innovative approaches to sustainability in management theory and practice, with particular attention to emerging market contexts and post-pandemic business environments.</p>
+                        <a href="#" class="btn secondary-btn">Learn More</a>
+                    </div>
+                    <div class="special-issue-card">
+                        <div class="issue-badge">Open for Submissions</div>
+                        <h3>Green Finance and Sustainable Investment in South Asia</h3>
+                        <p class="issue-journal">Ecological Economics & Sustainability Journal</p>
+                        <p class="issue-deadline"><i class="far fa-calendar-alt"></i> Submission Deadline: July 15, 2025</p>
+                        <p class="issue-description">This special issue examines developments in green finance, sustainable investment criteria, and ESG implementation in South Asian financial markets and investment landscapes.</p>
+                        <a href="#" class="btn secondary-btn">Learn More</a>
+                    </div>
+                    <div class="special-issue-card">
+                        <div class="issue-badge">Open for Submissions</div>
+                        <h3>Digital Transformation for Sustainability</h3>
+                        <p class="issue-journal">Innovation & Sustainability Review</p>
+                        <p class="issue-deadline"><i class="far fa-calendar-alt"></i> Submission Deadline: August 30, 2025</p>
+                        <p class="issue-description">This special issue explores how digital technologies—including AI, blockchain, and IoT—are being leveraged to address sustainability challenges across various industry sectors.</p>
+                        <a href="#" class="btn secondary-btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="special-issues-all">
+                    <a href="#" class="view-all-link">View All Special Issues <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Newsletter Section (Common across pages) -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <h2>Stay Updated</h2>
+                <p>Stay updated with the latest research, calls for papers, and conference invites.</p>
+                <form action="#" method="post" class="newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn subscribe-btn">Subscribe</button>
+                    </div>
+                    <div class="consent-check">
+                        <input type="checkbox" id="consent" required>
+                        <label for="consent">I agree to receive emails from CSMR and understand I can unsubscribe at any time.</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Common across pages) -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="logo-svg-footer">
+                            <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="35" fill="#ffffff" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                                <rect x="65" y="15" width="2" height="30" fill="#ffffff"/>
+                                <text x="75" y="28" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">Centre for Sustainability</text>
+                                <text x="75" y="42" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">& Management Research</text>
+                        </svg>
+                        </div>
+                    </div>
+                    <p>Publishing cutting-edge research in sustainability and management since 2015.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="journals.html">Journals</a></li>
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="authors.html">For Authors</a></li>
+                        <li><a href="conferences.html">Conferences</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <address>
+                        CSMR Headquarters<br>
+                        123 Research Avenue<br>
+                        New Delhi, 110001<br>
+                        India
+                    </address>
+                    <p>Email: <a href="mailto:info@csmr.org">info@csmr.org</a></p>
+                    <p>Phone: +91 11 2345 6789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Centre for Sustainability and Management Research. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/error-handler.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/papers.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load articles from API
+            const loadArticles = async () => {
+                try {
+                    const articlesContainer = document.querySelector('.articles-grid');
+                    if (!articlesContainer) return;
+                    
+                    // Show loading indicator
+                    articlesContainer.innerHTML = '<div class="loading-indicator">Loading articles...</div>';
+                    
+                    // Get articles from API
+                    const articlesData = await ArticleService.getArticles();
+                    
+                    if (articlesData && articlesData.articles && articlesData.articles.length > 0) {
+                        // Clear loading indicator
+                        articlesContainer.innerHTML = '';
+                        
+                        // Add articles to the grid
+                        articlesData.articles.forEach(article => {
+                            const articleCard = document.createElement('div');
+                            articleCard.className = 'article-card';
+                            
+                            // Format date
+                            const pubDate = article.publicationDate ? new Date(article.publicationDate) : new Date(article.submissionDate);
+                            const formattedDate = pubDate.toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                            
+                            // Create article card HTML
+                            articleCard.innerHTML = `
+                                <div class="article-meta">
+                                    <span class="article-journal">${article.journal.title || ''}</span>
+                                    <span class="article-date">${formattedDate}</span>
+                                </div>
+                                <h3 class="article-title">
+                                    <a href="article-detail.html?id=${article._id}">${article.title}</a>
+                                </h3>
+                                <div class="article-authors">
+                                    ${article.authors.map(author => author.name).join(', ')}
+                                </div>
+                                <p class="article-abstract">${article.abstract.substring(0, 150)}...</p>
+                                <div class="article-footer">
+                                    <div class="article-keywords">
+                                        ${article.keywords.map(keyword => `<span class="keyword">${keyword}</span>`).join('')}
+                                    </div>
+                                    <a href="${article.pdfUrl}" class="btn secondary-btn" target="_blank">View PDF</a>
+                                </div>
+                            `;
+                            
+                            articlesContainer.appendChild(articleCard);
+                        });
+                        
+                        // Add pagination if needed
+                        if (articlesData.pages > 1) {
+                            const paginationContainer = document.createElement('div');
+                            paginationContainer.className = 'pagination';
+                            
+                            let paginationHTML = '';
+                            if (articlesData.page > 1) {
+                                paginationHTML += `<a href="#" class="page-link" data-page="${articlesData.page - 1}">« Previous</a>`;
+                            }
+                            
+                            for (let i = 1; i <= articlesData.pages; i++) {
+                                if (i === articlesData.page) {
+                                    paginationHTML += `<span class="current-page">${i}</span>`;
+                                } else {
+                                    paginationHTML += `<a href="#" class="page-link" data-page="${i}">${i}</a>`;
+                                }
+                            }
+                            
+                            if (articlesData.page < articlesData.pages) {
+                                paginationHTML += `<a href="#" class="page-link" data-page="${articlesData.page + 1}">Next »</a>`;
+                            }
+                            
+                            paginationContainer.innerHTML = paginationHTML;
+                            document.querySelector('.articles-section').appendChild(paginationContainer);
+                            
+                            // Add event listeners to pagination links
+                            document.querySelectorAll('.page-link').forEach(link => {
+                                link.addEventListener('click', function(e) {
+                                    e.preventDefault();
+                                    const page = this.getAttribute('data-page');
+                                    loadArticlesPage(page);
+                                });
+                            });
+                        }
+                    } else {
+                        articlesContainer.innerHTML = '<div class="no-articles">No articles found</div>';
+                    }
+                } catch (error) {
+                    console.error('Error loading articles:', error);
+                    document.querySelector('.articles-grid').innerHTML = '<div class="error-message">Error loading articles. Please try again later.</div>';
+                }
+            };
+            
+            // Function to load a specific page of articles
+            const loadArticlesPage = (page) => {
+                // Implementation would be similar to loadArticles but with page parameter
+                console.log(`Loading page ${page}`);
+                // For now, just reload the first page
+                loadArticles();
+            };
+            
+            // Load articles when page loads
+            loadArticles();
+            
+            // Search functionality
+            const searchForm = document.querySelector('.search-form');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const keyword = document.querySelector('.search-input').value;
+                    
+                    if (keyword.trim() !== '') {
+                        // Implement search with API call
+                        ArticleService.getArticles(`?keyword=${encodeURIComponent(keyword)}`)
+                            .then(articlesData => {
+                                console.log('Search results:', articlesData);
+                                // Would replace articles with search results
+                                // Similar to loadArticles function
+                            })
+                            .catch(error => {
+                                console.error('Error searching articles:', error);
+                            });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+/* 
+* Content Pages Styling - Taylor & Francis Inspired
+* For CSMR website content pages (policies, guidelines, etc.)
+*/
+
+/* ========== PAGE HEADER STYLES ========== */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #003b9a 100%);
+    color: var(--white);
+    padding: 2.5rem 0;
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow-medium);
+}
+
+.page-header h1 {
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 2.2rem;
+}
+
+.breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+}
+
+.breadcrumbs li + li:before {
+    content: '›';
+    margin: 0 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.breadcrumbs a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+/* ========== CONTENT NAVIGATION ========== */
+.content-navigation {
+    background-color: var(--light-blue-bg);
+    border-radius: 5px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--box-shadow-light);
+    border: 1px solid rgba(0, 39, 122, 0.1);
+}
+
+.content-navigation h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 39, 122, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin-bottom: 0.6rem;
+}
+
+.nav-links a {
+    display: block;
+    padding: 0.4rem 0;
+    color: var(--primary-blue);
+    border-left: 3px solid transparent;
+    transition: all var(--transition-standard);
+    padding-left: 0.75rem;
+}
+
+.nav-links a:hover {
+    background-color: rgba(0, 39, 122, 0.05);
+    border-left: 3px solid var(--accent-blue);
+    padding-left: 1rem;
+}
+
+.nav-links a.active {
+    background-color: rgba(0, 39, 122, 0.08);
+    border-left: 3px solid var(--primary-blue);
+    font-weight: 600;
+}
+
+/* ========== CONTENT LAYOUT ========== */
+.page-content {
+    padding-bottom: 3rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 992px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.content-main {
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 2rem;
+    box-shadow: var(--box-shadow-light);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ========== SECTION STYLES ========== */
+.content-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.content-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.content-section h2 {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.content-section h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-blue);
+}
+
+.content-section h3 {
+    color: var(--secondary-blue);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 1rem 0;
+}
+
+/* ========== CONTENT BOXES ========== */
+.content-box {
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: var(--box-shadow-light);
+    transition: all var(--transition-standard);
+}
+
+.content-box:hover {
+    box-shadow: var(--box-shadow-medium);
+    border-color: rgba(0, 39, 122, 0.15);
+}
+
+.content-box h3 {
+    color: var(--primary-blue);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.content-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* ========== LIST STYLES ========== */
+.content-main ul, 
+.content-main ol {
+    margin: 0 0 1.5rem 1.25rem;
+}
+
+.content-main li {
+    margin-bottom: 0.5rem;
+}
+
+.bulleted-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 1.5rem;
+}
+
+.bulleted-list li {
+    position: relative;
+    margin-bottom: 0.75rem;
+}
+
+.bulleted-list li:before {
+    content: "•";
+    color: var(--accent-blue);
+    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+}
+
+/* ========== TABLE STYLES ========== */
+.content-table {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-collapse: collapse;
+}
+
+.content-table th, 
+.content-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.content-table th {
+    background-color: var(--light-blue-bg);
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.content-table tr:nth-child(even) {
+    background-color: rgba(0, 39, 122, 0.03);
+}
+
+.content-table tr:hover {
+    background-color: rgba(0, 39, 122, 0.06);
+}
+
+/* ========== HIGHLIGHT SECTIONS ========== */
+.highlight-section {
+    background-color: var(--light-blue-bg);
+    border-left: 4px solid var(--accent-blue);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.highlight-section h3 {
+    color: var(--primary-blue);
+    margin-top: 0;
+}
+
+.highlight-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* ========== COMMITMENT SECTION ========== */
+.commitment-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #003b9a 100%);
+    color: var(--white);
+    padding: 3rem 0;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.commitment-section h2 {
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+.commitment-section p {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.commitment-section .btn {
+    margin-top: 1rem;
+}
+
+/* ========== RESPONSIVE ADJUSTMENTS ========== */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 2rem 0;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .content-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .content-section h3 {
+        font-size: 1.3rem;
+    }
+    
+    .content-box {
+        padding: 1.25rem;
+    }
+    
+    .content-main {
+        padding: 1.5rem;
+    }
+}

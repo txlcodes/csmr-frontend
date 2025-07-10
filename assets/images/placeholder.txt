@@ -1,0 +1,9 @@
+For a fully functional website, you would need to add the following images to the assets/images folder:
+
+1. csmr-logo.png - A dark blue and white logo for the header
+2. csmr-logo-white.png - White version of the logo for the footer
+3. hero-bg.jpg - Background image of a university/research setting
+4. journal-1.png through journal-4.png - Journal cover images
+5. partner-1.png through partner-6.png - Partner institution logos
+
+Since these are placeholder images, you can replace them with real images for the actual website.

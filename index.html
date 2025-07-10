@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centre for Sustainability and Management Research (CSMR)</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Favicon removed as it was causing issues -->
+    <style>
+        /* User dropdown styles */
+        .user-dropdown {
+            position: relative;
+            display: none;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        .user-dropdown .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background-color: rgba(38, 132, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .user-dropdown .user-info:hover {
+            background-color: rgba(38, 132, 255, 0.2);
+        }
+        
+        .user-dropdown .user-name {
+            font-weight: 500;
+            color: #00277a;
+        }
+        
+        .user-dropdown .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 180px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .user-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .user-dropdown .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .user-dropdown .dropdown-menu a:hover {
+            background-color: #f8f8f8;
+        }
+        
+        .user-dropdown .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-dropdown .dropdown-menu #logout-link {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        
+        .user-dropdown .dropdown-menu #logout-link:hover {
+            background-color: #fff8f8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Utility Bar -->
+    <div class="top-utility-bar">
+        <div class="container">
+            <div class="utility-left">
+                <a href="#" class="institution-access">Institutional Access</a>
+                <a href="conferences.html#special-issue">Learn More</a>
+            </div>
+            <div class="utility-right">
+                <div class="auth-buttons">
+                    <a href="#" class="login-btn">Login</a>
+                    <span>/</span>
+                    <a href="#" class="register-btn">Register</a>
+                    <span>/</span>
+                    <a href="admin.html" class="admin-test-btn" style="color: red;">Admin Test</a>
+                </div>
+                <div class="language-dropdown">
+                    <select>
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="ta">தமிழ்</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sticky Header (Navigation Bar) -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-svg">
+                            <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="35" fill="#00277a" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                                <rect x="65" y="15" width="2" height="30" fill="#2684ff"/>
+                                <text x="75" y="28" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">Centre for Sustainability</text>
+                                <text x="75" y="42" fill="#00277a" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">& Management Research</text>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Search journals, articles, authors…" aria-label="Search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li class="has-dropdown">
+                        <a href="journals.html">Journals</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Browse By Subject</h4>
+                                <ul>
+                                    <li><a href="journals.html#sustainability">Sustainability Science</a></li>
+                                    <li><a href="journals.html#management">Management Studies</a></li>
+                                    <li><a href="journals.html#policy">Policy Research</a></li>
+                                    <li><a href="journals.html#economics">Environmental Economics</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Featured Journals</h4>
+                                <ul>
+                                    <li><a href="journal-jsm.html">Journal of Sustainable Management</a></li>
+                                    <li><a href="journal-isr.html">Innovation & Sustainability Review</a></li>
+                                    <li><a href="journal-msq.html">Management Studies Quarterly</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li class="has-dropdown">
+                        <a href="authors.html">Authors</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Author Resources</h4>
+                                <ul>
+                                    <li><a href="submission-guidelines.html">Submission Guidelines</a></li>
+                                    <li><a href="author-services.html">Author Services</a></li>
+                                    <li><a href="ethics-policies.html">Ethics & Policies</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                    <li><a href="review-system.html">Review System</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Announcement Banner -->
+    <div class="announcement-banner">
+        <div class="container">
+            <p><strong>Call for Papers:</strong> Special Issue on Sustainable Innovation - Deadline May 31, 2025 <a href="conferences.html#special-issue">Learn More</a></p>
+        </div>
+    </div>
+
+    <!-- Hero Section / Banner Area -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="reveal-text">Centre for Sustainability and <span>Management Research</span></h1>
+                <p class="reveal-text">Publishing cutting-edge research in sustainability, innovation, and responsible management practices across India and beyond.</p>
+                <div class="cta-buttons reveal-text">
+                    <a href="journals.html" class="btn primary-btn">Browse Journals</a>
+                    <a href="submission-guidelines.html" class="btn secondary-btn">Submit Your Manuscript</a>
+                </div>
+            </div>
+            <div class="hero-backdrop">
+                <div class="pattern-overlay"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Access Panel -->
+    <section class="quick-access-panel">
+        <div class="container">
+            <div class="panel-wrapper">
+                <a href="journals.html" class="quick-access-item">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Browse Journals</h3>
+                    <p>Explore our comprehensive collection of peer-reviewed journals</p>
+                </a>
+                <a href="submission-guidelines.html" class="quick-access-item">
+                    <i class="fas fa-upload"></i>
+                    <h3>Submit Paper</h3>
+                    <p>Start the submission process for your research manuscript</p>
+                </a>
+                <a href="authors.html" class="quick-access-item">
+                    <i class="fas fa-user-edit"></i>
+                    <h3>For Authors</h3>
+                    <p>Guidelines, policies and resources for contributing authors</p>
+                </a>
+                <a href="articles.html" class="quick-access-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>For Researchers</h3>
+                    <p>Access tools and resources to support your research</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Journals Section -->
+    <section class="featured-journals">
+        <div class="container">
+            <h2 class="section-title">Featured Journals</h2>
+            <div class="journals-grid">
+                <div class="journal-card">
+                    <div class="journal-icon">
+                        <div class="journal-placeholder" style="background-color: #00277a; border-radius: 5px; height: 150px; width: 110px; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">JSM</div>
+                    </div>
+                    <h3>Journal of Sustainable Management</h3>
+                    <p class="issn">ISSN: 2456-7890</p>
+                    <p class="description">Focused on sustainable business practices and environmental management policies.</p>
+                    <a href="journal-jsm.html" class="view-journal">View Journal</a>
+                </div>
+                <div class="journal-card">
+                    <div class="journal-icon">
+                        <div class="journal-placeholder" style="background-color: #0053b3; border-radius: 5px; height: 150px; width: 110px; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">ISR</div>
+                    </div>
+                    <h3>Innovation & Sustainability Review</h3>
+                    <p class="issn">ISSN: 2345-6789</p>
+                    <p class="description">Examines the intersection of innovation and sustainable development.</p>
+                    <a href="journal-isr.html" class="view-journal">View Journal</a>
+                </div>
+                <div class="journal-card">
+                    <div class="journal-icon">
+                        <div class="journal-placeholder" style="background-color: #2684ff; border-radius: 5px; height: 150px; width: 110px; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">MSQ</div>
+                    </div>
+                    <h3>Management Studies Quarterly</h3>
+                    <p class="issn">ISSN: 3456-7891</p>
+                    <p class="description">Covers contemporary management theories and practices in global contexts.</p>
+                    <a href="journal-msq.html" class="view-journal">View Journal</a>
+                </div>
+                <div class="journal-card">
+                    <div class="journal-icon">
+                        <div class="journal-placeholder" style="background-color: #00277a; border-radius: 5px; height: 150px; width: 110px; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">SSP</div>
+                    </div>
+                    <h3>Sustainability Science & Policy</h3>
+                    <p class="issn">ISSN: 4567-8912</p>
+                    <p class="description">Addresses policy implications of sustainability science research.</p>
+                    <a href="journals.html#policy" class="view-journal">View Journal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles Section -->
+    <section class="latest-articles">
+        <div class="container">
+            <h2 class="section-title">Latest Research Articles</h2>
+            <div class="articles-tabs">
+                <ul class="tabs-nav">
+                    <li class="active" data-tab="latest">Latest</li>
+                    <li data-tab="most-viewed">Most Viewed</li>
+                    <li data-tab="editors-pick">Editor's Pick</li>
+                </ul>
+                <div class="tabs-content">
+                    <div id="latest" class="tab-content active">
+                        <div class="articles-grid">
+                            <div class="article-card">
+                                <h3><a href="#">Sustainable Supply Chain Management in Indian Manufacturing: A Case Study Analysis</a></h3>
+                                <p class="authors">Dr. Rajesh Kumar, Dr. Priya Sharma</p>
+                                <p class="date">May 10, 2025</p>
+                                <span class="journal-tag">Journal of Sustainable Management</span>
+                                <a href="#" class="read-abstract">Read Abstract</a>
+                            </div>
+                            <div class="article-card">
+                                <h3><a href="#">The Impact of ESG Reporting on Financial Performance: Evidence from Indian Corporations</a></h3>
+                                <p class="authors">Dr. Vikram Singh, Dr. Anita Desai</p>
+                                <p class="date">May 8, 2025</p>
+                                <span class="journal-tag">Innovation & Sustainability Review</span>
+                                <a href="#" class="read-abstract">Read Abstract</a>
+                            </div>
+                            <div class="article-card">
+                                <h3><a href="#">Sustainable Innovation in Small-Medium Enterprises: Strategies and Challenges</a></h3>
+                                <p class="authors">Dr. Meena Patel, Dr. Rahul Verma</p>
+                                <p class="date">May 5, 2025</p>
+                                <span class="journal-tag">Management Studies Quarterly</span>
+                                <a href="#" class="read-abstract">Read Abstract</a>
+                            </div>
+                            <div class="article-card">
+                                <h3><a href="#">Circular Economy Implementation in Public Sector Organizations</a></h3>
+                                <p class="authors">Dr. Sunil Agarwal, Dr. Lakshmi Rao</p>
+                                <p class="date">May 3, 2025</p>
+                                <span class="journal-tag">Sustainability Science & Policy</span>
+                                <a href="#" class="read-abstract">Read Abstract</a>
+                            </div>
+                            <div class="article-card">
+                                <h3><a href="#">Climate Adaptation Strategies for Business Resilience in South Asia</a></h3>
+                                <p class="authors">Dr. Arjun Reddy, Dr. Neha Gupta</p>
+                                <p class="date">May 1, 2025</p>
+                                <span class="journal-tag">Journal of Sustainable Management</span>
+                                <a href="#" class="read-abstract">Read Abstract</a>
+                            </div>
+                            <div class="article-card">
+                                <h3><a href="#">Stakeholder Engagement in Corporate Sustainability Initiatives</a></h3>
+                                <p class="authors">Dr. Sanjay Mishra, Dr. Deepika Tiwari</p>
+                                <p class="date">April 28, 2025</p>
+                                <span class="journal-tag">Innovation & Sustainability Review</span>
+                                <a href="#" class="read-abstract">Read Abstract</a>
+                            </div>
+                        </div>
+                        <div class="pagination">
+                            <button class="load-more">Load More</button>
+                        </div>
+                    </div>
+                    <div id="most-viewed" class="tab-content">
+                        <!-- Content for Most Viewed tab -->
+                    </div>
+                    <div id="editors-pick" class="tab-content">
+                        <!-- Content for Editor's Pick tab -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call for Papers Section -->
+    <section class="call-for-papers">
+        <div class="container">
+            <div class="cfp-content">
+                <h2>Call for Papers: Volume 4, Issue 1</h2>
+                <h3>Theme: "Sustainable Innovation & Future Management Practices"</h3>
+                <p class="deadline">Deadline: May 31, 2025</p>
+                <a href="#" class="btn primary-btn">Submit Now</a>
+                <a href="#" class="guidelines-link">View Submission Guidelines</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Publish With CSMR Section -->
+    <section class="why-publish">
+        <div class="container">
+            <h2 class="section-title">Why Publish With CSMR?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Double-blind peer review</h3>
+                    <p>All submissions undergo rigorous double-blind peer review process ensuring quality and fairness.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast and fair review process</h3>
+                    <p>Our streamlined review process ensures timely decisions with comprehensive feedback.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Indexed in Indian libraries</h3>
+                    <p>All journals are indexed in major Indian library databases for maximum visibility.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Experienced editorial board</h3>
+                    <p>Our journals are managed by leading experts from prestigious institutions across India.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <h3>Global academic reach</h3>
+                    <p>Expose your research to a diverse international audience of researchers and practitioners.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-unlock"></i>
+                    </div>
+                    <h3>Free access for Indian institutions</h3>
+                    <p>Special access programs ensure your work reaches all Indian academic institutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & Reach Section -->
+    <section class="impact-reach">
+        <div class="container">
+            <h2 class="section-title">Our Impact & Reach</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">Researchers Published</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-number" data-count="800">0</div>
+                    <div class="stat-label">Peer-reviewed Articles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="stat-number" data-count="35">0</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="stat-number" data-count="10">0</div>
+                    <div class="stat-label">Institutional Partnerships</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Subscription -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <h2>Stay Updated</h2>
+                <p>Stay updated with the latest research, calls for papers, and conference invites.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your academic email address" required>
+                    <button type="submit" class="btn primary-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Affiliations / Partnerships Section -->
+    <section class="affiliations">
+        <div class="container">
+            <h2 class="section-title">Our Academic Partners</h2>
+            <div class="partners-carousel">
+                <div class="partner-logo">
+                    <div style="width: 140px; height: 60px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-radius: 3px;">Partner 1</div>
+                </div>
+                <div class="partner-logo">
+                    <div style="width: 140px; height: 60px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-radius: 3px;">Partner 2</div>
+                </div>
+                <div class="partner-logo">
+                    <div style="width: 140px; height: 60px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-radius: 3px;">Partner 3</div>
+                </div>
+                <div class="partner-logo">
+                    <div style="width: 140px; height: 60px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-radius: 3px;">Partner 4</div>
+                </div>
+                <div class="partner-logo">
+                    <div style="width: 140px; height: 60px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-radius: 3px;">Partner 5</div>
+                </div>
+                <div class="partner-logo">
+                    <div style="width: 140px; height: 60px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-radius: 3px;">Partner 6</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="logo-svg-footer">
+                            <svg width="300" height="60" viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                                <text x="5" y="35" fill="#ffffff" font-family="Merriweather, serif" font-weight="700" font-size="24">CSMR</text>
+                                <rect x="65" y="15" width="2" height="30" fill="#ffffff"/>
+                                <text x="75" y="28" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">Centre for Sustainability</text>
+                                <text x="75" y="42" fill="#ffffff" font-family="Source Sans Pro, sans-serif" font-weight="400" font-size="12">& Management Research</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="mission">The Centre for Sustainability and Management Research is dedicated to advancing knowledge through rigorous academic inquiry that addresses the critical challenges of sustainable development and ethical management practices.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Journals</a></li>
+                        <li><a href="#">Submission Guidelines</a></li>
+                        <li><a href="#">Editorial Board</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="admin.html" class="admin-link" style="display:none;">Admin Panel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> contact@csmr.org.in</li>
+                        <li><i class="fas fa-phone"></i> +91 11 2345 6789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Academic Block 4, Research Park, New Delhi - 110001, India</li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-researchgate"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Centre for Sustainability and Management Research (CSMR). All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+        <a href="#" class="btn primary-btn">Submit Now</a>
+    </div>
+
+    <!-- Quick fix for login/register buttons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Quick fix for auth buttons loaded');
+            
+            // Direct fix for login button
+            const loginBtns = document.querySelectorAll('.login-btn');
+            loginBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Login button clicked');
+                    const loginModal = document.getElementById('login-modal');
+                    if (!loginModal) {
+                        // Create login modal if it doesn't exist
+                        createLoginModal();
+                    }
+                    document.getElementById('login-modal').style.display = 'block';
+                });
+            });
+            
+            // Direct fix for register button
+            const registerBtns = document.querySelectorAll('.register-btn');
+            registerBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Register button clicked');
+                    const registerModal = document.getElementById('register-modal');
+                    if (!registerModal) {
+                        // Create register modal if it doesn't exist
+                        createRegisterModal();
+                    }
+                    document.getElementById('register-modal').style.display = 'block';
+                });
+            });
+            
+            // Create login modal if it doesn't exist
+            function createLoginModal() {
+                const loginModal = document.createElement('div');
+                loginModal.id = 'login-modal';
+                loginModal.className = 'auth-modal';
+                loginModal.innerHTML = `
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Login to CSMR</h2>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-email">Email</label>
+                                <input type="email" id="login-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" id="login-password" required>
+                            </div>
+                            <div class="form-message"></div>
+                            <button type="submit" class="btn primary-btn">Login</button>
+                        </form>
+                        <p class="auth-switch">Don't have an account? <a href="#" id="show-register">Register</a></p>
+                    </div>
+                `;
+                document.body.appendChild(loginModal);
+                
+                // Set up event listener for login form
+                const loginForm = document.getElementById('login-form');
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('login-email').value;
+                    const password = document.getElementById('login-password').value;
+                    
+                    if (email && password) {
+                        // Check for admin emails (demo)
+                        let role = 'user';
+                        let isAdmin = false;
+                        
+                        if (email.includes('admin')) {
+                            role = 'admin';
+                            isAdmin = true;
+                        } else if (email.includes('master')) {
+                            role = 'master';
+                            isAdmin = true;
+                        }
+                        
+                        alert('Login successful with email: ' + email);
+                        loginModal.style.display = 'none';
+                        
+                        // Replace auth buttons with user dropdown
+                        const authButtons = document.querySelector('.auth-buttons');
+                        if (authButtons) {
+                            authButtons.style.display = 'none';
+                            
+                            // Create user dropdown
+                            const userDropdown = document.createElement('div');
+                            userDropdown.className = 'user-dropdown';
+                            userDropdown.style.display = 'block';
+                            
+                            // Add admin link if user is admin
+                            const adminLink = isAdmin ? 
+                                `<a href="admin.html">Admin Panel</a>` : '';
+                            
+                            userDropdown.innerHTML = `
+                                <div class="user-info">
+                                    <span class="user-name">${email.split('@')[0]}</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="dropdown-menu">
+                                    <a href="#">My Profile</a>
+                                    <a href="#">My Papers</a>
+                                    ${adminLink}
+                                    <a href="#" id="logout-link">Logout</a>
+                                </div>
+                            `;
+                            
+                            authButtons.parentNode.appendChild(userDropdown);
+                            
+                            // Handle dropdown toggle
+                            userDropdown.querySelector('.user-info').addEventListener('click', function() {
+                                const menu = userDropdown.querySelector('.dropdown-menu');
+                                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                            });
+                            
+                            // Handle logout
+                            userDropdown.querySelector('#logout-link').addEventListener('click', function(e) {
+                                e.preventDefault();
+                                userDropdown.remove();
+                                authButtons.style.display = 'flex';
+                                alert('Logged out successfully');
+                            });
+                            
+                            // Close dropdown when clicking outside
+                            document.addEventListener('click', function(e) {
+                                if (!userDropdown.contains(e.target)) {
+                                    userDropdown.querySelector('.dropdown-menu').style.display = 'none';
+                                }
+                            });
+                        }
+                    }
+                });
+                
+                // Set up close button
+                loginModal.querySelector('.close-modal').addEventListener('click', function() {
+                    loginModal.style.display = 'none';
+                });
+                
+                // Close when clicking outside
+                window.addEventListener('click', function(e) {
+                    if (e.target === loginModal) {
+                        loginModal.style.display = 'none';
+                    }
+                });
+                
+                // Switch to register
+                loginModal.querySelector('#show-register').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    loginModal.style.display = 'none';
+                    const registerModal = document.getElementById('register-modal');
+                    if (!registerModal) {
+                        createRegisterModal();
+                    }
+                    document.getElementById('register-modal').style.display = 'block';
+                });
+            }
+            
+            // Create register modal if it doesn't exist
+            function createRegisterModal() {
+                const registerModal = document.createElement('div');
+                registerModal.id = 'register-modal';
+                registerModal.className = 'auth-modal';
+                registerModal.innerHTML = `
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2>Register for CSMR</h2>
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label for="register-name">Full Name</label>
+                                <input type="text" id="register-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-email">Email</label>
+                                <input type="email" id="register-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Password</label>
+                                <input type="password" id="register-password" required minlength="6">
+                                <small>Password must be at least 6 characters</small>
+                            </div>
+                            <div class="form-message"></div>
+                            <button type="submit" class="btn primary-btn">Register</button>
+                        </form>
+                        <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+                    </div>
+                `;
+                document.body.appendChild(registerModal);
+                
+                // Set up event listener for register form
+                const registerForm = document.getElementById('register-form');
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('register-name').value;
+                    const email = document.getElementById('register-email').value;
+                    const password = document.getElementById('register-password').value;
+                    
+                    if (name && email && password) {
+                        // Check for admin emails (demo)
+                        let role = 'user';
+                        let isAdmin = false;
+                        
+                        if (email.includes('admin')) {
+                            role = 'admin';
+                            isAdmin = true;
+                        } else if (email.includes('master')) {
+                            role = 'master';
+                            isAdmin = true;
+                        }
+                        
+                        alert('Registration successful for: ' + name);
+                        registerModal.style.display = 'none';
+                        
+                        // Replace auth buttons with user dropdown
+                        const authButtons = document.querySelector('.auth-buttons');
+                        if (authButtons) {
+                            authButtons.style.display = 'none';
+                            
+                            // Create user dropdown
+                            const userDropdown = document.createElement('div');
+                            userDropdown.className = 'user-dropdown';
+                            userDropdown.style.display = 'block';
+                            
+                            // Add admin link if user is admin
+                            const adminLink = isAdmin ? 
+                                `<a href="admin.html">Admin Panel</a>` : '';
+                            
+                            userDropdown.innerHTML = `
+                                <div class="user-info">
+                                    <span class="user-name">${name}</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="dropdown-menu">
+                                    <a href="#">My Profile</a>
+                                    <a href="#">My Papers</a>
+                                    ${adminLink}
+                                    <a href="#" id="logout-link">Logout</a>
+                                </div>
+                            `;
+                            
+                            authButtons.parentNode.appendChild(userDropdown);
+                            
+                            // Handle dropdown toggle
+                            userDropdown.querySelector('.user-info').addEventListener('click', function() {
+                                const menu = userDropdown.querySelector('.dropdown-menu');
+                                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                            });
+                            
+                            // Handle logout
+                            userDropdown.querySelector('#logout-link').addEventListener('click', function(e) {
+                                e.preventDefault();
+                                userDropdown.remove();
+                                authButtons.style.display = 'flex';
+                                alert('Logged out successfully');
+                            });
+                            
+                            // Close dropdown when clicking outside
+                            document.addEventListener('click', function(e) {
+                                if (!userDropdown.contains(e.target)) {
+                                    userDropdown.querySelector('.dropdown-menu').style.display = 'none';
+                                }
+                            });
+                        }
+                    }
+                });
+                
+                // Set up close button
+                registerModal.querySelector('.close-modal').addEventListener('click', function() {
+                    registerModal.style.display = 'none';
+                });
+                
+                // Close when clicking outside
+                window.addEventListener('click', function(e) {
+                    if (e.target === registerModal) {
+                        registerModal.style.display = 'none';
+                    }
+                });
+                
+                // Switch to login
+                registerModal.querySelector('#show-login').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    registerModal.style.display = 'none';
+                    const loginModal = document.getElementById('login-modal');
+                    if (!loginModal) {
+                        createLoginModal();
+                    }
+                    document.getElementById('login-modal').style.display = 'block';
+                });
+            }
+        });
+    </script>
+
+    <!-- Fix for dropdown menus -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fix for journal dropdown menu
+            const journalDropdown = document.querySelector('.main-nav li.has-dropdown:nth-child(2)');
+            if (journalDropdown) {
+                // Add extra padding to ensure dropdown has enough space
+                const dropdownMenu = journalDropdown.querySelector('.dropdown-menu');
+                
+                // Ensure dropdown doesn't overflow the viewport
+                function adjustDropdownPosition() {
+                    if (window.innerWidth < 1200) {
+                        dropdownMenu.style.left = '0';
+                        dropdownMenu.style.transform = 'none';
+                    } else {
+                        dropdownMenu.style.left = '50%';
+                        dropdownMenu.style.transform = 'translateX(-50%)';
+                    }
+                }
+                
+                // Initial adjustment
+                adjustDropdownPosition();
+                
+                // Adjust on resize
+                window.addEventListener('resize', adjustDropdownPosition);
+                
+                // For touch devices
+                if ('ontouchstart' in window) {
+                    journalDropdown.addEventListener('click', function(e) {
+                        if (e.target.closest('a') === journalDropdown.querySelector('> a')) {
+                            e.preventDefault();
+                            dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+                        }
+                    });
+                    
+                    // Close when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (!journalDropdown.contains(e.target)) {
+                            dropdownMenu.style.display = 'none';
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+
+    <!-- Admin panel link visibility script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for admin link in the footer
+            const adminLink = document.querySelector('.admin-link');
+            if (adminLink) {
+                // This is a simple way to check if user is admin for demo purposes
+                // In a real app, this would use Firebase auth state
+                document.addEventListener('click', function(e) {
+                    // When login is successful
+                    if (e.target.closest('#login-form') && e.target.type === 'submit') {
+                        const emailInput = document.getElementById('login-email');
+                        if (emailInput && (emailInput.value.includes('admin') || emailInput.value.includes('master'))) {
+                            adminLink.style.display = 'block';
+                        }
+                    }
+                    
+                    // When logout is clicked
+                    if (e.target.id === 'logout-link') {
+                        adminLink.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script src="js/error-handler.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
