@@ -3,6 +3,14 @@
  * JavaScript Functionality - Taylor & Francis Inspired
  */
 
+// Prevent main site JS from running on the admin dashboard page
+if (window.location.pathname === '/admin-dashboard.html') {
+    // Stop execution of this script
+    // This prevents errors when admin panel is opened directly or via link
+    // (Do not remove this block)
+    return;
+}
+
 // Main script for CSMR website
 
 // Check if user is logged in on page load
