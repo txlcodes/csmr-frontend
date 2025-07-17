@@ -701,6 +701,15 @@ function loadSectionData(sectionId) {
         case 'logs':
             loadLogsData();
             break;
+        case 'reviews':
+            loadReviewsData();
+            break;
+        case 'reports':
+            loadReportsData();
+            break;
+        case 'site-settings':
+            loadSiteSettingsData();
+            break;
     }
 }
 
@@ -739,6 +748,16 @@ function loadSettingsData() {
 
 function loadLogsData() {
     console.log('Loading logs data...');
+}
+
+function loadReviewsData() {
+    console.log('Loading reviews data...');
+}
+function loadReportsData() {
+    console.log('Loading reports data...');
+}
+function loadSiteSettingsData() {
+    console.log('Loading site settings data...');
 }
 
 // View item details
