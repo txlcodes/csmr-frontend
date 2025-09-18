@@ -803,6 +803,61 @@
     transform: translateY(-2px);
 }
 
+/* ========== ACADEMIC PARTNERS SECTION ========== */
+.academic-partners-section {
+    background: #f8fafc;
+    padding: 4rem 0;
+    margin: 4rem 0;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.partner-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.partner-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.partner-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #00277a;
+}
+
+.partner-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #00277a;
+    margin-bottom: 0.5rem;
+}
+
+.partner-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
 /* ========== DARK MODE SUPPORT ========== */
 @media (prefers-color-scheme: dark) {
     .modern-card {
