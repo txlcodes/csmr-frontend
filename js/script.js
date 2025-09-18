@@ -39,22 +39,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add custom event listeners
     addEventListeners();
     
-    console.log('CSMR Website Loaded!');
-    
     // Check if login/register buttons exist
     const loginBtn = document.querySelector('.login-btn');
     const registerBtn = document.querySelector('.register-btn');
     
-    if (loginBtn) {
-        console.log('Login button found in DOM');
-    } else {
-        console.error('Login button NOT found in DOM');
-    }
-    
-    if (registerBtn) {
-        console.log('Register button found in DOM');
-    } else {
-        console.error('Register button NOT found in DOM');
+    if (config.isDevelopment) {
+        if (loginBtn) {
+            console.log('Login button found in DOM');
+        } else {
+            console.warn('Login button NOT found in DOM');
+        }
+        
+        if (registerBtn) {
+            console.log('Register button found in DOM');
+        } else {
+            console.warn('Register button NOT found in DOM');
+        }
     }
     
     // Intersection Observer for reveal animations
@@ -453,18 +453,12 @@ if (window.location.hostname.includes('netlify.app') || window.location.hostname
 
 // Check if user is authenticated and update UI accordingly
 function checkAuthStatus() {
-    const token = localStorage.getItem('token');
-    let user = null;
-    try {
-        const userStr = localStorage.getItem('user');
-        user = userStr ? JSON.parse(userStr) : null;
-    } catch (e) {
-        user = null;
-    }
-    
-    if (token && user) {
-        // User is logged in
-        console.log('User is authenticated:', user);
+    if (AuthService.isLoggedIn()) {
+        const user = AuthService.getCurrentUser();
+        
+        if (config.isDevelopment) {
+            console.log('User is authenticated:', user);
+        }
         
         // Update UI elements that depend on authentication
         document.querySelectorAll('.auth-dependent').forEach(el => {
@@ -476,14 +470,15 @@ function checkAuthStatus() {
         });
         
         // Show admin links if user is admin
-        if (user.isAdmin) {
+        if (AuthService.isAdmin()) {
             document.querySelectorAll('.admin-only').forEach(el => {
                 el.style.display = 'block';
             });
         }
     } else {
-        // User is not logged in
-        console.log('No authenticated user');
+        if (config.isDevelopment) {
+            console.log('No authenticated user');
+        }
         
         document.querySelectorAll('.auth-dependent').forEach(el => {
             el.style.display = 'none';
@@ -516,14 +511,13 @@ function addEventListeners() {
     // Submit paper buttons
     document.querySelectorAll('.submit-paper-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
-            const token = localStorage.getItem('token');
-            if (!token) {
+            if (!AuthService.isLoggedIn()) {
                 e.preventDefault();
                 // Trigger login modal
                 const loginModal = document.getElementById('login-modal');
                 if (loginModal) {
                     loginModal.style.display = 'block';
-                    showToast('Please login to submit a paper', 'info');
+                    errorHandler.showNotification('Please login to submit a paper', 'info');
                 }
             }
             // If authenticated, the default link behavior takes over
@@ -535,7 +529,7 @@ function addEventListeners() {
     if (langDropdown) {
         langDropdown.addEventListener('change', function() {
             // Just a demo - real implementation would change the page language
-            showToast(`Language changed to ${this.options[this.selectedIndex].text}`, 'info');
+            errorHandler.showNotification(`Language changed to ${this.options[this.selectedIndex].text}`, 'info');
         });
     }
 }
@@ -739,150 +733,25 @@ function initNewsletterForm() {
             e.preventDefault();
             
             const emailInput = this.querySelector('input[type="email"]');
-            const email = emailInput?.value;
+            const email = emailInput?.value?.trim();
             
-            if (!email || !isValidEmail(email)) {
-                showToast('Please enter a valid email address', 'error');
+            if (!email) {
+                errorHandler.showNotification('Please enter your email address', 'error');
                 return;
             }
             
             try {
-                const response = await fetch(`${config.API_BASE_URL}/newsletter`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    showToast('Thank you for subscribing to our newsletter!', 'success');
-                    emailInput.value = '';
-                } else {
-                    throw new Error(data.message || 'Failed to subscribe. Please try again.');
-                }
+                await NewsletterService.subscribe(email);
+                errorHandler.showNotification('Thank you for subscribing to our newsletter!', 'success');
+                emailInput.value = '';
             } catch (error) {
-                console.error('Newsletter subscription error:', error);
-                showToast(error.message || 'Failed to subscribe. Please try again.', 'error');
+                errorHandler.handleError(error, errorHandler.errorTypes.API);
             }
         });
     }
 }
 
-// Validate email format
+// Validate email format (using formValidator for consistency)
 function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Show toast notification
-function showToast(message, type = 'info') {
-    // Create toast container if it doesn't exist
-    let toastContainer = document.getElementById('toast-container');
-    
-    if (!toastContainer) {
-        toastContainer = document.createElement('div');
-        toastContainer.id = 'toast-container';
-        document.body.appendChild(toastContainer);
-        
-        // Add toast styles
-        const style = document.createElement('style');
-        style.textContent = `
-            #toast-container {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                z-index: 1000;
-            }
-            
-            .toast {
-                padding: 12px 20px;
-                margin-bottom: 10px;
-                border-radius: 4px;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-                font-size: 14px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                min-width: 250px;
-                max-width: 350px;
-                animation: slide-in 0.3s ease-out;
-            }
-            
-            .toast.info {
-                background-color: #e3f2fd;
-                color: #0d47a1;
-                border-left: 4px solid #2196f3;
-            }
-            
-            .toast.success {
-                background-color: #e8f5e9;
-                color: #2e7d32;
-                border-left: 4px solid #4caf50;
-            }
-            
-            .toast.warning {
-                background-color: #fffde7;
-                color: #ff6f00;
-                border-left: 4px solid #ffc107;
-            }
-            
-            .toast.error {
-                background-color: #ffebee;
-                color: #c62828;
-                border-left: 4px solid #f44336;
-            }
-            
-            .toast .close-toast {
-                cursor: pointer;
-                margin-left: 10px;
-                font-weight: bold;
-            }
-            
-            @keyframes slide-in {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            @keyframes fade-out {
-                from { opacity: 1; }
-                to { opacity: 0; }
-            }
-        `;
-        
-        document.head.appendChild(style);
-    }
-    
-    // Create toast
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.innerHTML = `
-        <span>${message}</span>
-        <span class="close-toast">&times;</span>
-    `;
-    
-    // Add to container
-    toastContainer.appendChild(toast);
-    
-    // Add close functionality
-    toast.querySelector('.close-toast').addEventListener('click', function() {
-        toast.style.animation = 'fade-out 0.3s forwards';
-        setTimeout(() => {
-            toast.remove();
-        }, 300);
-    });
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-        if (toast.parentNode) {
-            toast.style.animation = 'fade-out 0.3s forwards';
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.remove();
-                }
-            }, 300);
-        }
-    }, 5000);
+    return formValidator.validateEmail(email);
 }

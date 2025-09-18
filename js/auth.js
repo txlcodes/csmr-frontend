@@ -4,8 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Auth module loaded!');
-    
     // Remove any existing user dropdowns (cleanup)
     document.querySelectorAll('#user-dropdown').forEach(el => el.remove());
     
@@ -15,39 +13,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerButtons = document.querySelectorAll('.register-btn');
     
     if (loginButtons.length > 0) {
-        console.log('Found login buttons:', loginButtons.length);
         loginButtons.forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                console.log('Login button clicked directly');
                 const loginModal = document.getElementById('login-modal');
                 if (loginModal) {
                     loginModal.style.display = 'block';
                 } else {
-                    console.error('Login modal not found in DOM');
+                    if (config.isDevelopment) {
+                        console.error('Login modal not found in DOM');
+                    }
                 }
             });
         });
-    } else {
-        console.error('No login buttons found with class .login-btn');
     }
     
     if (registerButtons.length > 0) {
-        console.log('Found register buttons:', registerButtons.length);
         registerButtons.forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                console.log('Register button clicked directly');
                 const registerModal = document.getElementById('register-modal');
                 if (registerModal) {
                     registerModal.style.display = 'block';
                 } else {
-                    console.error('Register modal not found in DOM');
+                    if (config.isDevelopment) {
+                        console.error('Register modal not found in DOM');
+                    }
                 }
             });
         });
-    } else {
-        console.error('No register buttons found with class .register-btn');
     }
     
     // Create auth modal elements
@@ -60,16 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
     updateAuthUI();
     
     // Force user dropdown injection if logged in
-    const token = localStorage.getItem('token');
-    let user = null;
-    try {
-        const userStr = localStorage.getItem('user');
-        user = userStr ? JSON.parse(userStr) : null;
-    } catch (e) { user = null; }
-    if (token && user) {
+    if (AuthService.isLoggedIn()) {
+        const user = AuthService.getCurrentUser();
         // Remove again in case updateAuthUI added it in the wrong place
         document.querySelectorAll('#user-dropdown').forEach(el => el.remove());
-        const userDropdown = createUserDropdown(user.name || user.email, user.isAdmin ? 'admin' : 'user');
+        const userDropdown = createUserDropdown(user.name || user.email, user.role || 'user');
         const utilityRight = document.querySelector('.utility-right');
         if (utilityRight) {
             utilityRight.appendChild(userDropdown);
@@ -77,21 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
             userDropdown.style.visibility = 'visible';
             userDropdown.style.opacity = '1';
             userDropdown.style.position = 'relative';
-            console.log('User dropdown injected into .utility-right');
         } else if (document.querySelector('.header-main')) {
             document.querySelector('.header-main').appendChild(userDropdown);
             userDropdown.style.display = 'block';
             userDropdown.style.visibility = 'visible';
             userDropdown.style.opacity = '1';
             userDropdown.style.position = 'relative';
-            console.log('User dropdown injected into .header-main');
         } else {
             document.body.appendChild(userDropdown);
             userDropdown.style.display = 'block';
             userDropdown.style.visibility = 'visible';
             userDropdown.style.opacity = '1';
             userDropdown.style.position = 'relative';
-            console.log('User dropdown injected into body');
         }
         addUserDropdownToggle();
         // Bulletproof: direct logout event
@@ -99,8 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (logoutLink) {
             logoutLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
+                AuthService.logout();
                 updateAuthUI();
                 const currentPath = window.location.pathname;
                 if (currentPath.includes('admin') || currentPath.includes('dashboard')) {
@@ -351,27 +336,19 @@ function setupAuthListeners() {
             messageDiv.className = 'form-message';
             messageDiv.style.display = 'none';
             
-            const email = document.getElementById('login-email').value;
+            const email = document.getElementById('login-email').value.trim();
             const password = document.getElementById('login-password').value;
             
+            // Basic validation
+            if (!email || !password) {
+                messageDiv.textContent = 'Please fill in all fields';
+                messageDiv.classList.add('error');
+                messageDiv.style.display = 'block';
+                return;
+            }
+            
             try {
-                const response = await fetch(`${config.API_BASE_URL}/users/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-                
-                const data = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(data.message || 'Login failed');
-                }
-                
-                // Store token and user data
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data));
+                const data = await AuthService.login(email, password);
                 
                 // Show success message
                 messageDiv.textContent = 'Login successful! Redirecting...';
@@ -381,12 +358,14 @@ function setupAuthListeners() {
                 // Close modal and update UI
                 setTimeout(() => {
                     document.getElementById('login-modal').style.display = 'none';
-                updateAuthUI();
+                    updateAuthUI();
                     location.reload();
                 }, 1500);
                 
             } catch (error) {
-                console.error('Login error:', error);
+                if (config.isDevelopment) {
+                    console.error('Login error:', error);
+                }
                 messageDiv.textContent = error.message || 'Login failed. Please check your credentials.';
                 messageDiv.classList.add('error');
                 messageDiv.style.display = 'block';
@@ -404,38 +383,32 @@ function setupAuthListeners() {
             messageDiv.className = 'form-message';
             messageDiv.style.display = 'none';
             
-            const name = document.getElementById('register-name').value;
-            const email = document.getElementById('register-email').value;
+            const name = document.getElementById('register-name').value.trim();
+            const email = document.getElementById('register-email').value.trim();
             const password = document.getElementById('register-password').value;
-            const institution = document.getElementById('register-institution').value;
+            const institution = document.getElementById('register-institution').value.trim();
             const degree = document.getElementById('register-degree').value;
-            const interests = document.getElementById('register-interests').value.split(',').map(i => i.trim());
+            const interests = document.getElementById('register-interests').value.split(',').map(i => i.trim()).filter(i => i);
+            
+            // Basic validation
+            if (!name || !email || !password || !institution) {
+                messageDiv.textContent = 'Please fill in all required fields';
+                messageDiv.classList.add('error');
+                messageDiv.style.display = 'block';
+                return;
+            }
             
             try {
-                const response = await fetch(`${config.API_BASE_URL}/users`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ 
+                const userData = { 
                     name,
                     email,
-                        password,
+                    password,
                     institution,
-                        academicDegree: degree,
-                        researchInterests: interests
-                    })
-                });
+                    academicDegree: degree,
+                    researchInterests: interests
+                };
                 
-                const data = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(data.message || 'Registration failed');
-                }
-                
-                // Store token and user data
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data));
+                const data = await AuthService.register(userData);
                 
                 // Show success message
                 messageDiv.textContent = 'Registration successful! Redirecting...';
@@ -450,7 +423,9 @@ function setupAuthListeners() {
                 }, 1500);
                 
             } catch (error) {
-                console.error('Registration error:', error);
+                if (config.isDevelopment) {
+                    console.error('Registration error:', error);
+                }
                 messageDiv.textContent = error.message || 'Registration failed. Please try again.';
                 messageDiv.classList.add('error');
                 messageDiv.style.display = 'block';
@@ -462,11 +437,10 @@ function setupAuthListeners() {
     document.addEventListener('click', function(e) {
         if (e.target && e.target.id === 'logout-link') {
             e.preventDefault();
-            // Remove token and user data
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            // Use AuthService logout method
+            AuthService.logout();
             // Update UI
-                updateAuthUI();
+            updateAuthUI();
             // Redirect to home if on protected page
             const currentPath = window.location.pathname;
             if (currentPath.includes('admin') || currentPath.includes('dashboard')) {
@@ -480,15 +454,8 @@ function setupAuthListeners() {
 
 // Update UI based on authentication status
 function updateAuthUI() {
-    const token = localStorage.getItem('token');
-    let user = null;
-    try {
-        const userStr = localStorage.getItem('user');
-        user = userStr ? JSON.parse(userStr) : null;
-    } catch (e) {
-        user = null;
-    }
-    if (token && user) {
+    if (AuthService.isLoggedIn()) {
+        const user = AuthService.getCurrentUser();
         updateUserUI(user);
     } else {
         updateGuestUI();
@@ -533,11 +500,11 @@ function updateUserUI(user) {
     userDropdown.style.display = 'block';
     
     // Show admin link if user is admin
-    const adminLink = document.createElement('a');
-    adminLink.href = 'admin.html';
-    adminLink.textContent = 'Admin Dashboard';
-    
-    if (user.isAdmin && userDropdown) {
+    if (AuthService.isAdmin() && userDropdown) {
+        const adminLink = document.createElement('a');
+        adminLink.href = 'admin.html';
+        adminLink.textContent = 'Admin Dashboard';
+        
         const dropdownMenu = userDropdown.querySelector('.dropdown-menu');
         if (dropdownMenu) {
             // Check if admin link already exists
@@ -584,6 +551,8 @@ function createUserDropdown(userName, role) {
     dropdown.id = 'user-dropdown';
     dropdown.className = 'user-dropdown auth-dependent';
     
+    const adminLink = AuthService.isAdmin() ? '<a href="admin.html">Admin Dashboard</a>' : '';
+    
     dropdown.innerHTML = `
         <div class="user-info">
             <span class="user-name">${userName}</span>
@@ -592,7 +561,7 @@ function createUserDropdown(userName, role) {
         <div class="dropdown-menu">
             <a href="#" id="profile-link">My Profile</a>
             <a href="#" id="papers-link">My Papers</a>
-            ${role === 'admin' ? '<a href="admin.html">Admin Dashboard</a>' : ''}
+            ${adminLink}
             <a href="#" id="logout-link">Logout</a>
         </div>
     `;
@@ -758,8 +727,7 @@ function addUserDropdownToggle() {
     if (logoutLink) {
         logoutLink.addEventListener('click', function(e) {
             e.preventDefault();
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            AuthService.logout();
             updateAuthUI();
             const currentPath = window.location.pathname;
             if (currentPath.includes('admin') || currentPath.includes('dashboard')) {
