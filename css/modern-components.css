@@ -485,6 +485,324 @@
     letter-spacing: 0.5px;
 }
 
+/* ========== RESEARCH PAPER CARDS ========== */
+.research-papers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.research-paper-card {
+    background: white;
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+.research-paper-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.paper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 1rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.paper-type-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.paper-type-badge.research {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #1976d2;
+}
+
+.paper-type-badge.review {
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    color: #7b1fa2;
+}
+
+.paper-type-badge.policy {
+    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+    color: #388e3c;
+}
+
+.paper-metrics {
+    display: flex;
+    gap: 1rem;
+}
+
+.metric {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.metric i {
+    color: #2684ff;
+}
+
+.paper-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #00277a;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
+    padding: 0 1.5rem;
+}
+
+.paper-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.paper-title a:hover {
+    color: #2684ff;
+}
+
+.paper-authors {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding: 0 1.5rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.paper-authors i {
+    color: #2684ff;
+    font-size: 0.875rem;
+}
+
+.paper-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 0 1.5rem;
+    flex-wrap: wrap;
+}
+
+.paper-date,
+.paper-journal {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.paper-date i,
+.paper-journal i {
+    color: #2684ff;
+    font-size: 0.75rem;
+}
+
+.paper-abstract {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    padding: 0 1.5rem;
+    font-size: 0.95rem;
+}
+
+.paper-actions {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1.5rem 1.5rem;
+    flex-wrap: wrap;
+}
+
+.paper-actions .btn-modern {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+}
+
+/* ========== JOURNAL METRICS SECTION ========== */
+.journal-metrics-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e3f2fd 100%);
+    padding: 4rem 0;
+    margin: 4rem 0;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.metric-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.metric-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #00277a;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #00277a;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #00277a, #2684ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metric-label {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-description {
+    font-size: 0.875rem;
+    color: #888;
+    margin-top: 0.5rem;
+}
+
+/* ========== EDITORIAL BOARD STYLES ========== */
+.editorial-board-section {
+    padding: 4rem 0;
+    background: #f8fafc;
+}
+
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.board-member-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.board-member-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.member-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #00277a;
+    font-weight: 700;
+    border: 4px solid white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.member-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #00277a;
+    margin-bottom: 0.5rem;
+}
+
+.member-title {
+    font-size: 1rem;
+    color: #2684ff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.member-institution {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.member-expertise {
+    font-size: 0.875rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.member-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.member-social a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.member-social a:hover {
+    background: #2684ff;
+    color: white;
+    transform: translateY(-2px);
+}
+
 /* ========== DARK MODE SUPPORT ========== */
 @media (prefers-color-scheme: dark) {
     .modern-card {
