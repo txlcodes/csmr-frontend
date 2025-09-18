@@ -455,15 +455,17 @@
 
 .stat-item {
     padding: 2rem;
-    background: white;
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.15);
     transition: all 0.3s ease;
+    border: 2px solid #007bff;
 }
 
 .stat-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 123, 255, 0.25);
+    border-color: #0056b3;
 }
 
 .stat-number {
@@ -655,18 +657,19 @@
 }
 
 .metric-card {
-    background: white;
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.15);
     transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 2px solid #007bff;
 }
 
 .metric-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 123, 255, 0.25);
+    border-color: #0056b3;
 }
 
 .metric-icon {
@@ -882,7 +885,8 @@
     }
     
     .stat-item {
-        background: #2a2a2a;
-        color: #e0e0e0;
+        background: linear-gradient(135deg, #1e3a8a, #1e40af);
+        color: #ffffff;
+        border-color: #3b82f6;
     }
 }

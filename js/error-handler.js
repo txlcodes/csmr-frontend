@@ -162,30 +162,30 @@ class ErrorHandler {
             style.id = 'notification-styles';
             style.textContent = `
                 @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
                 @keyframes slideOut {
                     from { transform: translateX(0); opacity: 1; }
                     to { transform: translateX(100%); opacity: 0; }
                 }
             `;
-            document.head.appendChild(style);
-        }
-
+      document.head.appendChild(style);
+    }
+    
         container.appendChild(notification);
 
         // Auto-remove after 5 seconds
-        setTimeout(() => {
+      setTimeout(() => {
             if (notification.parentNode) {
                 notification.style.animation = 'slideOut 0.3s ease-out forwards';
-                setTimeout(() => {
+    setTimeout(() => {
                     if (notification.parentNode) {
                         notification.remove();
-                    }
-                }, 300);
-            }
-        }, 5000);
+          }
+        }, 300);
+      }
+    }, 5000);
     }
 
     // Report error to monitoring service (placeholder)
