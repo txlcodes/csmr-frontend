@@ -3,6 +3,7 @@
  * Connects frontend to backend API endpoints
  */
 const API_URL = config.API_BASE_URL;
+const API_ENDPOINTS = config.endpoints;
 
 // Helper for making API requests with improved error handling
 async function fetchAPI(endpoint, options = {}) {
@@ -324,4 +325,48 @@ const CFPService = {
   async getCFPs() {
     return fetchAPI('/cfp');
   },
+};
+
+// Admin Panel Services
+const AdminService = {
+  // Get dashboard statistics
+  async getDashboardStats() {
+    return await fetchAPI(API_ENDPOINTS.ADMIN_DASHBOARD);
+  },
+
+  // Get all users
+  async getUsers() {
+    return await fetchAPI(API_ENDPOINTS.ADMIN_USERS);
+  },
+
+  // Get all articles
+  async getArticles() {
+    return await fetchAPI(API_ENDPOINTS.ADMIN_ARTICLES);
+  },
+
+  // Get all reviews
+  async getReviews() {
+    return await fetchAPI(API_ENDPOINTS.ADMIN_REVIEWS);
+  },
+
+  // Get notifications
+  async getNotifications() {
+    return await fetchAPI(API_ENDPOINTS.ADMIN_NOTIFICATIONS);
+  },
+
+  // Update user status
+  async updateUserStatus(userId, status) {
+    return await fetchAPI(`${API_ENDPOINTS.ADMIN_USERS}/${userId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ status })
+    });
+  },
+
+  // Update article status
+  async updateArticleStatus(articleId, status) {
+    return await fetchAPI(`${API_ENDPOINTS.ADMIN_ARTICLES}/${articleId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ status })
+    });
+  }
 }; 
